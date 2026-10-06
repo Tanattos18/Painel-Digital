@@ -33,6 +33,66 @@ const DEMO_OPTIONS = [
   { value: "financeiro", label: "Financeiro" },
 ];
 
+const BRAND_VARS = [
+  "50",
+  "100",
+  "200",
+  "300",
+  "400",
+  "500",
+  "600",
+  "700",
+  "800",
+  "900",
+] as const;
+
+type BrandPreset = Record<string, string>;
+
+const BRAND_PRESETS: { label: string; vars: BrandPreset }[] = [
+  {
+    label: "Verde",
+    vars: {
+      "--color-brand-50": "#f0fdf4",
+      "--color-brand-100": "#dcfce7",
+      "--color-brand-200": "#bbf7d0",
+      "--color-brand-300": "#86efac",
+      "--color-brand-400": "#4ade80",
+      "--color-brand-500": "#22c55e",
+      "--color-brand-600": "#16a34a",
+      "--color-brand-700": "#15803d",
+      "--color-brand-800": "#166534",
+      "--color-brand-900": "#14532d",
+    },
+  },
+  {
+    label: "Roxo",
+    vars: {
+      "--color-brand-50": "#f5f3ff",
+      "--color-brand-100": "#ede9fe",
+      "--color-brand-200": "#ddd6fe",
+      "--color-brand-300": "#c4b5fd",
+      "--color-brand-400": "#a78bfa",
+      "--color-brand-500": "#8b5cf6",
+      "--color-brand-600": "#7c3aed",
+      "--color-brand-700": "#6d28d9",
+      "--color-brand-800": "#5b21b6",
+      "--color-brand-900": "#4c1d95",
+    },
+  },
+];
+
+function applyBrandPreset(vars: BrandPreset) {
+  Object.entries(vars).forEach(([name, value]) => {
+    document.documentElement.style.setProperty(name, value);
+  });
+}
+
+function resetBrandPreset() {
+  BRAND_VARS.forEach((step) => {
+    document.documentElement.style.removeProperty(`--color-brand-${step}`);
+  });
+}
+
 export default function ComponentsDemoPage() {
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -47,6 +107,29 @@ export default function ComponentsDemoPage() {
           mais necessária.
         </p>
       </div>
+
+      <Card title="Cores de marca (variáveis CSS)">
+        <p className="mb-3 text-sm text-zinc-500 dark:text-zinc-400">
+          Teste da Tarefa 012: trocar <code>--color-brand-*</code> no{" "}
+          <code>:root</code> e verificar que botão, menu ativo e indicador
+          acompanham sem alterar componentes.
+        </p>
+        <div className="flex flex-wrap gap-2">
+          <Button size="sm" onClick={resetBrandPreset}>
+            Padrão (azul)
+          </Button>
+          {BRAND_PRESETS.map((preset) => (
+            <Button
+              key={preset.label}
+              size="sm"
+              variant="secondary"
+              onClick={() => applyBrandPreset(preset.vars)}
+            >
+              {preset.label}
+            </Button>
+          ))}
+        </div>
+      </Card>
 
       <Card title="Botão">
         <div className="flex flex-wrap gap-2">

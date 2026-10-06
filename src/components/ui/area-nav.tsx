@@ -34,7 +34,7 @@ function NavList({ items, pathname, onNavigate }: NavListProps) {
                 "block rounded-md px-3 py-2 text-sm",
                 "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-500",
                 active
-                  ? "bg-zinc-200 font-medium text-zinc-900 dark:bg-zinc-800 dark:text-zinc-50"
+                  ? "bg-brand-50 font-medium text-brand-700 dark:bg-brand-900/30 dark:text-brand-200"
                   : "text-zinc-600 hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-900 dark:hover:text-zinc-50",
               ].join(" ")}
             >
