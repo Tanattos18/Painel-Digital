@@ -1,12 +1,10 @@
+import { AreaNav } from "@/components/ui/area-nav";
+import { ADMIN_NAV_ITEMS } from "@/constants/navigation";
+
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex min-h-screen">
-      <aside className="hidden w-64 shrink-0 flex-col gap-2 border-r border-zinc-200 bg-zinc-50 p-4 md:flex dark:border-zinc-800 dark:bg-zinc-900">
-        <p className="text-sm font-semibold">Administração</p>
-        <p className="text-xs text-zinc-500">
-          Menu será adicionado na Tarefa 010.
-        </p>
-      </aside>
+    <div className="flex min-h-screen flex-col md:flex-row">
+      <AreaNav label="Administração" items={ADMIN_NAV_ITEMS} />
       <main className="flex min-w-0 flex-1 flex-col p-6">{children}</main>
     </div>
   );
