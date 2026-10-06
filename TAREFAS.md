@@ -57,6 +57,29 @@ XXX
 ```
 A próxima tarefa **não** é executada automaticamente se exigir decisão importante.
 
+## Registro de execução
+
+### 2026-10-06 — Base do projeto criada (Tarefa 008 concluída)
+
+Você pediu a base do projeto com pastas e estrutura. Como não havia projeto existente, a base foi gerada do zero com `create-next-app`. Isso cobriu o essencial das tarefas 001–004 e 006–008, mas **sem passar pelos checkpoints formais**:
+
+| Tarefa | Situação |
+|---|---|
+| 001–004 (análise) | Substituídas por projeto novo; diagnóstico da base gerada em `docs/desenvolvimento.md` e abaixo. **Formalizar se você tiver um projeto pré-existente.** |
+| 005 (arquitetura) | **Confirmação pendente.** A estrutura criada usa a proposta ADR-003 (organização por feature). Se você discordar, ajustamos. |
+| 006 (estrutura) | Aplicada conforme `docs/arquitetura.md` §5, por pedido seu (inclui pastas de fases futuras, vazias com `.gitkeep`). |
+| 007 (documentação) | `docs/` criado; documentos sem conteúdo real ficaram como esqueleto declarado. |
+| 008 (organizar aplicação) | **CONCLUÍDA.** Lint e build passam. |
+
+Base gerada: Next.js 16.4.0 (App Router, Turbopack), React 19.3.0, TypeScript 5 com `strict`, Tailwind CSS 4, ESLint 9, npm, alias `@/*`, `src/`.
+
+Observações da base:
+- `next.config.ts` já vem com `cacheComponents` e `partialPrefetching` ativos; isso afeta leitura de dados dinâmicos (ver `docs/desenvolvimento.md`).
+- O `AGENTS.md` gerado pede para consultar a documentação local do Next antes de escrever código.
+- A fonte Geist (Google Fonts) foi substituída por fontes do sistema, porque o build dependia de rede externa e o painel precisa evoluir para funcionar offline. Reversível na Tarefa 012.
+- `npm audit`: 5 vulnerabilidades altas, todas na cadeia de ferramentas de lint (`eslint-config-next` → `fast-glob` → `micromatch` → `braces`), sem chegar ao código de produção. A correção sugerida (`--force`) faria *downgrade* para `eslint-config-next@14`, então **não foi aplicada**. Reavaliar na Tarefa 053.
+
+---
 ## Resumo
 
 | Fase | Nome | Tarefas | Status |
@@ -74,7 +97,7 @@ A próxima tarefa **não** é executada automaticamente se exigir decisão impor
 | 10 | SEGURANÇA | 052–055 | PENDENTE |
 | 11 | PILOTO | 056–064 | PENDENTE |
 
-**Próxima tarefa: 001 — Analisar projeto** (aguarda sua autorização e o código do projeto).
+**Próxima tarefa: 009 — Layout** (aguarda sua autorização). Pendências formais das tarefas 001–007 estão no *Registro de execução* abaixo.
 
 ---
 
@@ -409,16 +432,16 @@ Criar a estrutura base de diretórios aprovada na Tarefa 006 e configurar aliase
 
 ### Critérios de conclusão
 
-- [ ] Estrutura criada conforme aprovado.
-- [ ] Build e lint passam.
-- [ ] Nenhum segredo versionado.
-- [ ] Testes executados e registrados
-- [ ] Documentação correspondente atualizada
-- [ ] Checkpoint apresentado
+- [x] Estrutura criada conforme aprovado.
+- [x] Build e lint passam.
+- [x] Nenhum segredo versionado.
+- [x] Testes executados e registrados
+- [x] Documentação correspondente atualizada
+- [x] Checkpoint apresentado
 
 ### Status
 
-PENDENTE
+CONCLUÍDA
 
 ---
 

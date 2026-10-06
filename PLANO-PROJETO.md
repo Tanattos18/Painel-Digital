@@ -21,6 +21,8 @@
 
 ### 1.1 Limitação desta análise (leia primeiro)
 
+> **Atualização (2026-10-06):** como não havia projeto existente, a base foi criada do zero (Next.js 16.4.0, App Router, React 19.3.0, TypeScript estrito, Tailwind 4, ESLint 9, npm). Os itens [A VERIFICAR] do baseline abaixo agora têm resposta em `TAREFAS.md` (Registro de execução) e `docs/desenvolvimento.md`.
+
 O prompt determina que, antes de qualquer proposta, todo o projeto existente seja inspecionado
 (`package.json`, `package-lock.json`, `src/`, `public/`, configurações de TypeScript, Next.js,
 Tailwind e ESLint, componentes, páginas, scripts).

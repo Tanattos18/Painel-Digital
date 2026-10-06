@@ -5,8 +5,9 @@
 **Plataforma multi-tenant para gerenciamento de atendimento, filas de espera e painéis digitais em tempo real.**
 
 ![Status](https://img.shields.io/badge/status-em_desenvolvimento-orange?style=for-the-badge)
-![Fase](https://img.shields.io/badge/fase-arquitetura_%26_planejamento-blue?style=for-the-badge)
-![Código](https://img.shields.io/badge/código-não_iniciado-red?style=for-the-badge)
+![Fase](https://img.shields.io/badge/fase-1_base_da_aplicação-blue?style=for-the-badge)
+![Código](https://img.shields.io/badge/base-criada-brightgreen?style=for-the-badge)
+![Tarefa](https://img.shields.io/badge/próxima_tarefa-009_layout-lightgrey?style=for-the-badge)
 
 ![Next.js](https://img.shields.io/badge/Next.js-000000?logo=nextdotjs&logoColor=white&style=flat-square)
 ![React](https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=black&style=flat-square)
@@ -15,9 +16,10 @@
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?logo=tailwindcss&logoColor=white&style=flat-square)
 ![ESLint](https://img.shields.io/badge/ESLint-4B32C3?logo=eslint&logoColor=white&style=flat-square)
 
-> 🚧 **Em desenvolvimento — fase de arquitetura e planejamento.**
-> Este README documenta o projeto **como está planejado**. Nenhuma funcionalidade descrita aqui foi implementada:
-> ainda não existe código funcional nem dependências instaladas no repositório.
+> 🚧 **Em desenvolvimento — Fase 1 (base da aplicação).**
+> A base do projeto está criada (Next.js 16.4, estrutura por feature, docs), mas **nenhuma funcionalidade
+> descrita neste README foi implementada ainda**. As dependências ainda não foram instaladas nesta máquina
+> (`npm install` pendente).
 
 </div>
 
@@ -29,7 +31,7 @@
 - [Exemplos de uso](#-exemplos-de-uso)
 - [Como funciona](#-como-funciona)
 - [Status atual](#-status-atual)
-- [Stack planejada](#-stack-planejada)
+- [Stack](#-stack)
 - [Visão geral do domínio](#-visão-geral-do-domínio)
 - [Multi-tenancy](#️-multi-tenancy)
 - [Painéis (Displays)](#-painéis-displays)
@@ -136,31 +138,34 @@ Após o tempo configurado, o painel **retoma automaticamente** a playlist de mí
 
 | Item | Situação |
 |---|---|
-| 📄 Documentação (plano, tarefas, arquitetura) | ✅ Em elaboração — Fase 0 |
-| 💻 Código funcional | ⬜ Ainda não iniciado |
-| 📦 Dependências do projeto | ⬜ Ainda não instaladas |
-| 🗄️ Banco de dados | ⏸️ Não definido — aguarda decisão |
-| 🔐 Autenticação | ⏸️ Não definida — aguarda decisão |
-| ⚡ Tempo real | ⏸️ Não definido — aguarda decisão |
+| 📄 Documentação (plano, tarefas, arquitetura) | ✅ Atualizada — com *Registro de execução* |
+| 🏗️ Base da aplicação (Tarefa 008) | ✅ Concluída — lint e build passam |
+| 📁 Estrutura de pastas (Tarefa 006) | ✅ Aplicada — `src/` conforme `docs/arquitetura.md` §5 |
+| 💻 Funcionalidades | ⬜ Nenhuma implementada (nenhuma tela, regra ou API) |
+| 📦 Dependências | ⬜ `package.json` criado; `npm install` pendente nesta máquina |
+| 🗄️ Banco de dados | ⏸️ Não definido — aguarda decisão (antes da Tarefa 013) |
+| 🔐 Autenticação | ⏸️ Não definida — aguarda decisão (Tarefa 017) |
+| ⚡ Tempo real | ⏸️ Não definido — aguarda decisão (Tarefa 038) |
 | ☁️ Hospedagem | ⏸️ Não definida — aguarda decisão |
-| 🧪 Testes automatizados | ⬜ Ainda não iniciados |
+| 🧪 Testes automatizados | ⬜ Estrutura `tests/` criada; suíte vazia |
 
-> **Próxima etapa:** Tarefa 001 — Analisar projeto, seguida da definição de arquitetura.
+> **Próxima tarefa:** 009 — Layout *(aguarda autorização)*.
+> Pendências formais das Tarefas 001–007 estão no *Registro de execução* do [`TAREFAS.md`](TAREFAS.md).
 
 ---
 
-## 🧰 Stack planejada
+## 🧰 Stack
 
-| Camada | Tecnologia | Observação |
-|---|---|---|
-| Framework | **Next.js** | App Router, Route Handlers para a API |
-| Biblioteca | **React** | Interface das três áreas (admin, recepção, painel) |
-| Linguagem | **TypeScript** | Estrito, sem `any` sem justificativa |
-| Runtime | **Node.js** | Execução do backend |
-| Gerenciador de pacotes | **npm** | A confirmar na análise do projeto |
-| Estilo | **Tailwind CSS** | Tokens visuais e identidade por tenant |
-| Lint | **ESLint** | Regras de qualidade e padrões |
-| Tempo real | **WebSocket ou equivalente** | 🔎 **A ser definido na arquitetura** |
+| Camada | Tecnologia | Versão | Observação |
+|---|---|---|---|
+| Framework | **Next.js** | 16.4.0 | App Router, Turbopack, Route Handlers |
+| Biblioteca | **React** | 19.3.0 | Interface das três áreas (admin, recepção, painel) |
+| Linguagem | **TypeScript** | 5.x (`strict`) | Sem `any` sem justificativa |
+| Runtime | **Node.js** | 22+ | Execução do backend |
+| Gerenciador de pacotes | **npm** | — | `package-lock.json` presente |
+| Estilo | **Tailwind CSS** | 4.x | Tokens visuais e identidade por tenant |
+| Lint | **ESLint** | 9.x | `eslint-config-next` |
+| Tempo real | **WebSocket ou equivalente** | — | 🔎 **A ser definido na arquitetura** |
 
 > ⚠️ A tecnologia de tempo real exata (SSE, WebSocket ou serviço gerenciado) será decidida na
 > fase de arquitetura, **juntamente com a decisão de hospedagem**, pois uma depende da outra.
@@ -449,8 +454,10 @@ A documentação do projeto está organizada em:
 |---|---|
 | `README.md` | Porta de entrada do projeto (este documento) |
 | `PLANO-PROJETO.md` | Plano geral, decisões, modelo de dados, riscos e fases |
-| `TAREFAS.md` | 64 tarefas organizadas em 12 fases, com checklist e checkpoint |
+| `TAREFAS.md` | 64 tarefas em 12 fases, com checklist, checkpoint e *Registro de execução* |
 | `docs/arquitetura.md` | Arquitetura, camadas, fluxos e registro de decisões (ADRs) |
+| `docs/desenvolvimento.md` | Como rodar, convenções, fluxo de commits e definição de pronto |
+| `docs/api.md`, `banco-de-dados.md`, `painel.md`, `seguranca.md`, `tempo-real.md`, `testes.md` | Esqueletos — preenchidos conforme as fases |
 
 ---
 
@@ -458,24 +465,26 @@ A documentação do projeto está organizada em:
 
 ### Pré-requisitos
 
-| Ferramenta | Versão mínima | Finalidade |
+| Ferramenta | Versão | Finalidade |
 |---|---|---|
-| Node.js | 18+ (LTS recomendada) | Runtime do projeto |
+| Node.js | 22 (versão usada na criação da base) | Runtime do projeto |
 | npm | junto com o Node.js | Gerenciador de pacotes |
 | Git | qualquer versão estável | Controle de versão |
 | Editor | VS Code (recomendado) | Edição do código |
 
-### Comandos previstos *(quando o projeto tiver código)*
+### Comandos
 
 ```bash
 npm install      # instalar dependências
-npm run dev      # ambiente de desenvolvimento
-npm run build    # build de produção
-npm run lint     # verificação de estilo e erros
+npm run dev      # servidor de desenvolvimento
+npm run build    # build de produção (valida tipos)
+npm run lint     # verificação do ESLint
+npm run start    # executa o build de produção
 ```
 
-> ⚠️ O repositório ainda não possui `package.json`. Esses comandos **ainda não funcionam** —
-> serão válidos a partir da Fase 1 (Base da aplicação).
+> 📌 `npm install` **ainda não foi executado** nesta máquina (`node_modules/` ausente).
+> Antes de escrever código Next.js, consultar a documentação local indicada em `AGENTS.md`
+> e o guia em [`docs/desenvolvimento.md`](docs/desenvolvimento.md).
 
 ---
 
