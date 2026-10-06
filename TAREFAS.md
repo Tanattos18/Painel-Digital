@@ -59,6 +59,33 @@ A próxima tarefa **não** é executada automaticamente se exigir decisão impor
 
 ## Registro de execução
 
+### 2026-10-06 — Tarefa 011 concluída (Fase 1: 4/5)
+
+| Tarefa | Situação | Evidência |
+|---|---|---|
+| 011 Componentes | **CONCLUÍDA** | 9 componentes em `src/components/ui/` — `Button`, `TextField`, `SelectField`, `Card`, `SimpleTable<T>`, `Modal`, `Alert`, `EmptyState`, `Spinner` — tipagem forte, sem `any`, sem regra de negócio, **zero dependências novas** (HTML nativo + Tailwind, conforme "Regra sobre dependências"); página de demonstração `/dev/components` com todos os estados; `docs/componentes.md` criado |
+
+**Checkpoint — Tarefa 011:**
+
+```
+TAREFA: 011
+STATUS: CONCLUÍDA
+ARQUIVOS ALTERADOS: TAREFAS.md, README.md
+ARQUIVOS CRIADOS: src/components/ui/{button,text-field,select-field,card,
+simple-table,modal,alert,empty-state,spinner}.tsx,
+src/app/dev/components/page.tsx, docs/componentes.md
+ARQUIVOS REMOVIDOS: nenhum
+DEPENDÊNCIAS: nenhuma nova (rito de dependências não foi necessário:
+bibliotecas de UI/ícones não adotadas)
+TESTES EXECUTADOS: npm run lint (0 avisos); npm run build (7 rotas estáticas,
+TypeScript OK); dev server — 6 páginas = 200; /dev/components renderiza
+4 alerts, 2 spinners, tabela, 3 labels e 8 botões no HTML. Modal abre no
+cliente (não aparece no SSR — comportamento esperado); foco inicial e fechamento
+por Esc implementados no código; conferência interativa humana pendente.
+RESULTADO: conjunto mínimo de componentes prontos para as Fases 2–9
+PRÓXIMA TAREFA: 012 - Sistema visual
+```
+
 ### 2026-10-06 — Tarefa 010 concluída (Fase 1: 3/5)
 
 | Tarefa | Situação | Evidência |
@@ -178,7 +205,7 @@ Observações da base:
 | Fase | Nome | Tarefas | Status |
 |---|---|---|---|
 | 0 | PREPARAÇÃO | 001–007 | **✅ 7/7 CONCLUÍDA** |
-| 1 | BASE | 008–012 | **3/5** — 008 ✅ 009 ✅ 010 ✅ |
+| 1 | BASE | 008–012 | **4/5** — 008 ✅ 009 ✅ 010 ✅ 011 ✅ |
 | 2 | TENANT | 013–016 | PENDENTE |
 | 3 | ACESSO | 017–020 | PENDENTE |
 | 4 | CADASTROS | 021–025 | PENDENTE |
@@ -190,7 +217,7 @@ Observações da base:
 | 10 | SEGURANÇA | 052–055 | PENDENTE |
 | 11 | PILOTO | 056–064 | PENDENTE |
 
-**Progresso: 10/64 tarefas** (Fase 0 ✅ + 008 ✅ + 009 ✅ + 010 ✅). **Próxima tarefa: 011 — Componentes.**
+**Progresso: 11/64 tarefas** (Fase 0 ✅ + 008–011 ✅). **Próxima tarefa: 012 — Sistema visual.**
 
 ---
 
@@ -652,16 +679,16 @@ Criar o conjunto mínimo de componentes visuais reutilizáveis e sem regra de ne
 
 ### Critérios de conclusão
 
-- [ ] Componentes documentados e reutilizáveis.
-- [ ] Nenhum componente com lógica de negócio.
-- [ ] Dependência nova (se houver) justificada.
-- [ ] Testes executados e registrados
-- [ ] Documentação correspondente atualizada
-- [ ] Checkpoint apresentado
+- [x] Componentes documentados e reutilizáveis. *(documentados em `docs/componentes.md`; página de demonstração em `/dev/components`)*
+- [x] Nenhum componente com lógica de negócio. *(só apresentação; `Modal` só gerencia aberto/fechado)*
+- [x] Dependência nova (se houver) justificada. *(nenhuma dependência nova adicionada)*
+- [x] Testes executados e registrados
+- [x] Documentação correspondente atualizada
+- [x] Checkpoint apresentado
 
 ### Status
 
-PENDENTE
+CONCLUÍDA
 
 ---
 
