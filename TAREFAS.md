@@ -59,6 +59,33 @@ A próxima tarefa **não** é executada automaticamente se exigir decisão impor
 
 ## Registro de execução
 
+### 2026-10-06 — Tarefa 010 concluída (Fase 1: 3/5)
+
+| Tarefa | Situação | Evidência |
+|---|---|---|
+| 010 Navegação | **CONCLUÍDA** | `src/constants/navigation.ts` (itens de menu por área, campo `permission` reservado para a 020) + `src/components/ui/area-nav.tsx` (client component: aside no desktop, disclosure com `aria-expanded`/`aria-controls` no mobile, rota ativa via `usePathname` com `aria-current="page"`, foco visível); layouts `(admin)` e `(recepcao)` atualizados; `display` e `(auth)` sem navegação (correto) |
+
+**Checkpoint — Tarefa 010:**
+
+```
+TAREFA: 010
+STATUS: CONCLUÍDA
+ARQUIVOS ALTERADOS: src/app/(admin)/layout.tsx, src/app/(recepcao)/layout.tsx,
+TAREFAS.md, README.md
+ARQUIVOS CRIADOS: src/constants/navigation.ts, src/components/ui/area-nav.tsx
+ARQUIVOS REMOVIDOS: nenhum (.gitkeep de components/ui e constants removidos ao
+criar o primeiro arquivo de cada)
+DEPENDÊNCIAS: nenhuma nova
+TESTES EXECUTADOS: npm run lint (0 avisos); npm run build (6 rotas estáticas,
+TypeScript OK); dev server — 5 rotas = 200; /dashboard e /fila com
+aria-current="page" (1) e botão aria-expanded; /, /login e /display sem
+navegação. Teclado/foco: validado por código (elementos nativos
+nav/ul/li/a/button + focus-visible); conferência interativa humana pendente.
+RESULTADO: navegação responsiva das áreas admin e recepção; constantes prontas
+para filtro por permissão na Tarefa 020
+PRÓXIMA TAREFA: 011 - Componentes
+```
+
 ### 2026-10-06 — Tarefa 009 concluída (Fase 1 em andamento)
 
 | Tarefa | Situação | Evidência |
@@ -151,7 +178,7 @@ Observações da base:
 | Fase | Nome | Tarefas | Status |
 |---|---|---|---|
 | 0 | PREPARAÇÃO | 001–007 | **✅ 7/7 CONCLUÍDA** |
-| 1 | BASE | 008–012 | **2/5** — 008 ✅ 009 ✅ |
+| 1 | BASE | 008–012 | **3/5** — 008 ✅ 009 ✅ 010 ✅ |
 | 2 | TENANT | 013–016 | PENDENTE |
 | 3 | ACESSO | 017–020 | PENDENTE |
 | 4 | CADASTROS | 021–025 | PENDENTE |
@@ -163,7 +190,7 @@ Observações da base:
 | 10 | SEGURANÇA | 052–055 | PENDENTE |
 | 11 | PILOTO | 056–064 | PENDENTE |
 
-**Progresso: 9/64 tarefas** (Fase 0 ✅ + 008 ✅ + 009 ✅). **Próxima tarefa: 010 — Navegação.**
+**Progresso: 10/64 tarefas** (Fase 0 ✅ + 008 ✅ + 009 ✅ + 010 ✅). **Próxima tarefa: 011 — Componentes.**
 
 ---
 
@@ -585,16 +612,16 @@ Implementar navegação das áreas admin e recepção, adaptável a tamanhos de 
 
 ### Critérios de conclusão
 
-- [ ] Navegação funciona nos tamanhos-alvo.
-- [ ] Acessível por teclado.
-- [ ] Itens de menu sem strings espalhadas.
-- [ ] Testes executados e registrados
-- [ ] Documentação correspondente atualizada
-- [ ] Checkpoint apresentado
+- [x] Navegação funciona nos tamanhos-alvo. *(aside em md+, disclosure <md; verificação automática: 5 rotas 200, aria-current nas rotas certas; conferência visual interativa pendente)*
+- [x] Acessível por teclado. *(elementos nativos nav/ul/li/a/button + focus-visible:ring; conferência interativa Tab/Enter pendente)*
+- [x] Itens de menu sem strings espalhadas. *(tudo em `src/constants/navigation.ts`)*
+- [x] Testes executados e registrados
+- [x] Documentação correspondente atualizada
+- [x] Checkpoint apresentado
 
 ### Status
 
-PENDENTE
+CONCLUÍDA
 
 ---
 
