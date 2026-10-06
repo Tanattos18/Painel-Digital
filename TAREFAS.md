@@ -59,6 +59,33 @@ A próxima tarefa **não** é executada automaticamente se exigir decisão impor
 
 ## Registro de execução
 
+### 2026-10-06 — Tarefa 012 concluída (Fase 1 ENCERRADA — 5/5)
+
+| Tarefa | Situação | Evidência |
+|---|---|---|
+| 012 Sistema visual | **CONCLUÍDA** | `@theme` em `globals.css` com escala `--color-brand-50…900` (padrão azul, hex documentados); utilitários compilam para `var(--color-brand-*)` (**verificado no CSS gerado**: `.bg-brand-600{background-color:var(--color-brand-600)}`); marca aplicada em `Button` primary, `AreaNav` ativo e `Spinner`; contraste WCAG calculado (todos ≥ 4,5:1 — tabela em `docs/sistema-visual.md`); única animação: `animate-spin`; seletor de cor em `/dev/components` troca as variáveis em runtime |
+
+**Checkpoint — Tarefa 012:**
+
+```
+TAREFA: 012
+STATUS: CONCLUÍDA
+ARQUIVOS ALTERADOS: src/app/globals.css, src/components/ui/button.tsx,
+src/components/ui/area-nav.tsx, src/components/ui/spinner.tsx,
+src/app/dev/components/page.tsx, docs/componentes.md, TAREFAS.md, README.md
+ARQUIVOS CRIADOS: docs/sistema-visual.md
+ARQUIVOS REMOVIDOS: nenhum
+DEPENDÊNCIAS: nenhuma nova
+TESTES EXECUTADOS: npm run lint (0 avisos); npm run build (7 rotas, TS OK);
+dev — 6 páginas = 200 e /dashboard com bg-brand-50 no menu ativo; CSS compilado
+contém var(--color-brand-600) (prova da cascata); contraste WCAG: 5,17 (marca/
+branco), 6,16 (menu ativo), 4,83 (perigo), 17,93 (títulos) — todos AA ou melhor;
+grep: única animação = animate-spin; seletor de marca no demo troca variáveis.
+RESULTADO: Fase 1 completa (5/5) — MARCO M1 atingido; marca trocável por
+variável CSS, pronta para identidade por tenant na Tarefa 016
+PRÓXIMA TAREFA: 013 - Empresa ⛔ (aguarda decisão de banco/ORM/multi-tenant)
+```
+
 ### 2026-10-06 — Tarefa 011 concluída (Fase 1: 4/5)
 
 | Tarefa | Situação | Evidência |
@@ -205,7 +232,7 @@ Observações da base:
 | Fase | Nome | Tarefas | Status |
 |---|---|---|---|
 | 0 | PREPARAÇÃO | 001–007 | **✅ 7/7 CONCLUÍDA** |
-| 1 | BASE | 008–012 | **4/5** — 008 ✅ 009 ✅ 010 ✅ 011 ✅ |
+| 1 | BASE | 008–012 | **✅ 5/5 CONCLUÍDA** (M1 atingido) |
 | 2 | TENANT | 013–016 | PENDENTE |
 | 3 | ACESSO | 017–020 | PENDENTE |
 | 4 | CADASTROS | 021–025 | PENDENTE |
@@ -217,7 +244,7 @@ Observações da base:
 | 10 | SEGURANÇA | 052–055 | PENDENTE |
 | 11 | PILOTO | 056–064 | PENDENTE |
 
-**Progresso: 11/64 tarefas** (Fase 0 ✅ + 008–011 ✅). **Próxima tarefa: 012 — Sistema visual.**
+**Progresso: 12/64 tarefas** (Fases 0 e 1 ✅). **Próxima tarefa: 013 — Empresa ⛔** (decisão de banco/ORM/multi-tenant — não começa sem autorização).
 
 ---
 
@@ -720,16 +747,16 @@ Definir tokens visuais (cores, tipografia, espaçamento) com suporte à futura i
 
 ### Critérios de conclusão
 
-- [ ] Tokens documentados.
-- [ ] Troca de cor de marca via variável funciona em todos os componentes.
-- [ ] Interface sem animações exageradas.
-- [ ] Testes executados e registrados
-- [ ] Documentação correspondente atualizada
-- [ ] Checkpoint apresentado
+- [x] Tokens documentados. *(`docs/sistema-visual.md` com paleta, tipografia, espaçamento e contraste)*
+- [x] Troca de cor de marca via variável funciona em todos os componentes. *(CSS compilado usa `var(--color-brand-*)`; seletor no demo troca em runtime; componentes que usam marca: Button, AreaNav, Spinner)*
+- [x] Interface sem animações exageradas. *(única animação: `animate-spin`)*
+- [x] Testes executados e registrados
+- [x] Documentação correspondente atualizada
+- [x] Checkpoint apresentado
 
 ### Status
 
-PENDENTE
+CONCLUÍDA
 
 ---
 

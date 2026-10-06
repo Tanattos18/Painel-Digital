@@ -2,8 +2,9 @@
 
 Conjunto mínimo de componentes visuais reutilizáveis criado na **Tarefa 011**.
 Todos são **genéricos, sem regra de negócio e sem dependências novas** (HTML
-nativo + Tailwind). As cores ainda são classes utilitárias; a Tarefa 012
-migra os valores para tokens/variáveis CSS.
+nativo + Tailwind). As cores da marca vêm das variáveis `--color-brand-*`
+(definidas na **Tarefa 012** — ver `docs/sistema-visual.md`); os neutros usam a
+escala `zinc`.
 
 ## Componentes
 
