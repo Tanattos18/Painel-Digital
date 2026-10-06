@@ -16,10 +16,9 @@
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?logo=tailwindcss&logoColor=white&style=flat-square)
 ![ESLint](https://img.shields.io/badge/ESLint-4B32C3?logo=eslint&logoColor=white&style=flat-square)
 
-> 🚧 **Em desenvolvimento — Fase 1 (base da aplicação).**
-> A base do projeto está criada (Next.js 16.4, estrutura por feature, docs), mas **nenhuma funcionalidade
-> descrita neste README foi implementada ainda**. As dependências ainda não foram instaladas nesta máquina
-> (`npm install` pendente).
+> 🚧 **Em desenvolvimento — Fase 1 (base da aplicação).** **Progresso: 8/64 tarefas.**
+> A **Fase 0 (preparação) está concluída**: diagnóstico real, arquitetura aprovada e documentação consolidada.
+> **Nenhuma funcionalidade descrita neste README foi implementada ainda.**
 
 </div>
 
@@ -138,19 +137,19 @@ Após o tempo configurado, o painel **retoma automaticamente** a playlist de mí
 
 | Item | Situação |
 |---|---|
+| 🎯 **Fase 0 — Preparação (001–007)** | ✅ **Concluída (7/7)** — diagnóstico real, ADR-003 aprovada, docs consolidados |
 | 📄 Documentação (plano, tarefas, arquitetura) | ✅ Atualizada — com *Registro de execução* |
-| 🏗️ Base da aplicação (Tarefa 008) | ✅ Concluída — lint e build passam |
+| 🏗️ Base da aplicação (Tarefa 008) | ✅ Concluída — install/lint/build/dev validados (0 avisos de lint) |
 | 📁 Estrutura de pastas (Tarefa 006) | ✅ Aplicada — `src/` conforme `docs/arquitetura.md` §5 |
 | 💻 Funcionalidades | ⬜ Nenhuma implementada (nenhuma tela, regra ou API) |
-| 📦 Dependências | ⬜ `package.json` criado; `npm install` pendente nesta máquina |
+| 📦 Dependências | ✅ Instaladas (357 pacotes) — `npm audit`: 5 altas só na cadeia de lint |
 | 🗄️ Banco de dados | ⏸️ Não definido — aguarda decisão (antes da Tarefa 013) |
 | 🔐 Autenticação | ⏸️ Não definida — aguarda decisão (Tarefa 017) |
 | ⚡ Tempo real | ⏸️ Não definido — aguarda decisão (Tarefa 038) |
 | ☁️ Hospedagem | ⏸️ Não definida — aguarda decisão |
 | 🧪 Testes automatizados | ⬜ Estrutura `tests/` criada; suíte vazia |
 
-> **Próxima tarefa:** 009 — Layout *(aguarda autorização)*.
-> Pendências formais das Tarefas 001–007 estão no *Registro de execução* do [`TAREFAS.md`](TAREFAS.md).
+> **Progresso: 8/64 tarefas** · **Próxima tarefa:** 009 — Layout *(aguarda autorização)*.
 
 ---
 
@@ -486,9 +485,9 @@ npm run lint     # verificação do ESLint
 npm run start    # executa o build de produção
 ```
 
-> 📌 `npm install` **ainda não foi executado** nesta máquina (`node_modules/` ausente).
-> Antes de escrever código Next.js, consultar a documentação local indicada em `AGENTS.md`
-> e o guia em [`docs/desenvolvimento.md`](docs/desenvolvimento.md).
+> ✅ Validado em 2026-10-06 nesta máquina: `install` (72,5 s) · `lint` (10,3 s, 0 avisos) ·
+> `build` (9,4 s) · `dev` (ready em 728 ms). Antes de escrever código Next.js, consultar a
+> documentação local indicada em `AGENTS.md` e o guia em [`docs/desenvolvimento.md`](docs/desenvolvimento.md).
 
 ---
 

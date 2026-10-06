@@ -1,8 +1,7 @@
 # Arquitetura — SaaS de Atendimento, Filas e Painéis Digitais
 
-> Versão: 0.1 (Fase 0 — proposta, **não validada contra o código real**)
-> Este documento será revisado na Tarefa 005 (definir arquitetura) e 006 (definir estrutura),
-> depois que a Tarefa 001–004 inspecionar o projeto existente.
+> Versão: 0.2 (2026-10-06) — **validada contra o código real** nas Tarefas 001–006.
+> ADR-003 **confirmada** pelo solicitante em 2026-10-06 (Tarefa 005).
 > Decisões com status **PROPOSTA** são reversíveis. Decisões **PENDENTE** exigem autorização.
 
 ---
@@ -109,9 +108,11 @@ Sem contexto válido, **nenhum serviço de domínio é chamado**.
 
 ---
 
-## 5. Organização do código (alvo evolutivo)
+## 5. Organização do código (confirmada — Tarefa 006)
 
-Organização **por feature**; cada pasta só é criada na tarefa que a exige.
+Organização **por feature** (ADR-003 confirmada); cada pasta só é criada na tarefa que a exige.
+Estrutura **já aplicada** no repositório (pastas de fases futuras vazias com `.gitkeep`).
+Convenção de imports: alias `@/*` → `./src/*` (`tsconfig.json`).
 
 ```
 src/
@@ -310,7 +311,7 @@ Detalhamento futuro em `/docs/seguranca.md`.
 |---|---|---|---|
 | ADR-001 | Next.js + TypeScript + Tailwind + ESLint; sem trocar de stack | **DEFINIDA** (prompt) | — |
 | ADR-002 | Backend como fonte única de verdade; recepção e painel não se comunicam diretamente | **DEFINIDA** (prompt) | — |
-| ADR-003 | Organização por feature, camadas Borda → Contexto → Serviço → Repositório | PROPOSTA | 005/006 |
+| ADR-003 | Organização por feature, camadas Borda → Contexto → Serviço → Repositório | **CONFIRMADA** (2026-10-06) | 005/006 |
 | ADR-004 | Vocabulário genérico no código | **DEFINIDA** (prompt) | — |
 | ADR-005 | Banco de dados e ORM | **PENDENTE** | antes da 013 |
 | ADR-006 | Modelo multi-tenant (recomendado: coluna `tenantId` + RLS) | **PENDENTE** | antes da 013 |
@@ -327,7 +328,7 @@ Cada ADR aprovada ganhará seção própria (contexto, opções, decisão, conse
 
 ## 14. Pendências desta versão
 
-1. Validar tudo contra o projeto real (Tarefas 001–004).
-2. Confirmar App Router × Pages Router e ajustar a estrutura de `app/`.
-3. Decidir hospedagem do piloto (influencia ADR-009).
-4. Obter autorização para ADR-005, 006, 007, 009, 010.
+1. ~~Validar tudo contra o projeto real (Tarefas 001–004).~~ ✅ Concluído em 2026-10-06.
+2. ~~Confirmar App Router × Pages Router.~~ ✅ **App Router** confirmado (Tarefa 001).
+3. Decidir hospedagem do piloto (influencia ADR-009) — Tarefa 038 ⛔.
+4. Obter autorização para ADR-005, 006, 007, 009, 010 — tarefas 013, 017, 038, 043 ⛔.

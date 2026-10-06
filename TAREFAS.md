@@ -59,6 +59,46 @@ A próxima tarefa **não** é executada automaticamente se exigir decisão impor
 
 ## Registro de execução
 
+### 2026-10-06 — Tarefas 005–007 concluídas (Fase 0 encerrada)
+
+| Tarefa | Situação | Evidência |
+|---|---|---|
+| 005 Definir arquitetura ⛔ | **CONCLUÍDA** | Arquitetura validada contra o código real (App Router, estrutura por feature, alias, Tailwind 4 — nenhuma contradição); **ADR-003 aprovada pelo solicitante** em 2026-10-06; `docs/arquitetura.md` → v0.2; hospedagem segue pendente (Tarefa 038) |
+| 006 Definir estrutura | **CONCLUÍDA** | Estrutura documentada em `docs/arquitetura.md` §5 como **confirmada**; compatível com paths do TypeScript (`@/*` → `./src/*`); nenhum diretório novo criado nesta tarefa |
+| 007 Documentar decisões | **CONCLUÍDA** | `docs/desenvolvimento.md` reproduz o ambiente do zero (validado: install/lint/build/dev executados com sucesso); 6 esqueletos de `/docs` presentes com título e finalidade; registro de ADRs atualizado; links internos revisados (README → PLANO, TAREFAS, docs/*) |
+
+**Checkpoint — Fase 0 (7/7):**
+
+```
+TAREFA: 005 / 006 / 007
+STATUS: CONCLUÍDA
+ARQUIVOS ALTERADOS: docs/arquitetura.md, TAREFAS.md, PLANO-PROJETO.md, CHECKLIST.md
+ARQUIVOS CRIADOS: nenhum
+DEPENDÊNCIAS: nenhuma nova
+TESTES EXECUTADOS: revisão cruzada arquitetura × código; links internos; ambiente reproduzido do zero (install 72,5s / lint 10,3s / build 9,4s / dev 728ms)
+RESULTADO: Fase 0 completa; ADR-003 confirmada; documentação consistente
+PRÓXIMA TAREFA: 009 — Layout
+```
+
+### 2026-10-06 — Tarefas 001–004 formalizadas (análise do projeto real)
+
+Com o código no repositório, as quatro tarefas de análise foram executadas e documentadas:
+
+| Tarefa | Situação | Evidência |
+|---|---|---|
+| 001 Analisar projeto | **CONCLUÍDA** | Diagnóstico real gravado em `PLANO-PROJETO.md` §1.1–§1.3 (todas as 5 perguntas respondidas; baseline substituído por valores verificados no código) |
+| 002 Analisar ambiente | **CONCLUÍDA** | `npm install` (357 pacotes, 72,5 s), `npm run lint` (10,3 s, **0 avisos**), `npm run build` (9,4 s, 2 rotas estáticas, TypeScript OK), `npm run dev` (ready em 728 ms, encerrado com segurança). Node 24.21.0 nesta máquina × Node 22 na criação da base |
+| 003 Analisar dependências | **CONCLUÍDA** | 11 dependências diretas inventariadas com versões; `npm audit` = **5 altas**, todas na cadeia de lint (`braces` → `micromatch` → `fast-glob` → `@next/eslint-plugin-next` → `eslint-config-next`), **fora do código de produção**; correção `--force` faria downgrade para `eslint-config-next@14` → **não aplicada**; nenhuma alteração em `package.json`/lockfile |
+| 004 Analisar código existente | **CONCLUÍDA** | 1 página (`page.tsx`), 1 layout (raiz), 0 componentes, 3 arquivos `.ts/.tsx` reais; TS estrito sem `any`; lint sem avisos; proposta preservar/refatorar/descartar abaixo |
+
+**Proposta da Tarefa 004 (apenas proposta, nada executado):**
+
+- **Preservar:** `layout.tsx` (pt-BR, sem fonte externa), `page.tsx` (placeholder), `lib/config/env.ts`, `globals.css`, todas as configs e a estrutura `.gitkeep`.
+- **Refatorar:** nenhum (não há código de negócio ainda).
+- **Descartar (avaliar na revisão):** SVGs boilerplate do `create-next-app` em `public/` (`file.svg`, `globe.svg`, `next.svg`, `vercel.svg`, `window.svg`) — nenhum está referenciado.
+
+Avisos pré-existentes registrados (não corrigidos, conforme a tarefa): 5 vulnerabilidades altas de lint; aviso do npm sobre install script de `unrs-resolver`.
+
 ### 2026-10-06 — Base do projeto criada (Tarefa 008 concluída)
 
 Você pediu a base do projeto com pastas e estrutura. Como não havia projeto existente, a base foi gerada do zero com `create-next-app`. Isso cobriu o essencial das tarefas 001–004 e 006–008, mas **sem passar pelos checkpoints formais**:
@@ -84,8 +124,8 @@ Observações da base:
 
 | Fase | Nome | Tarefas | Status |
 |---|---|---|---|
-| 0 | PREPARAÇÃO | 001–007 | PENDENTE |
-| 1 | BASE | 008–012 | PENDENTE |
+| 0 | PREPARAÇÃO | 001–007 | **✅ 7/7 CONCLUÍDA** |
+| 1 | BASE | 008–012 | **1/5** — 008 ✅ |
 | 2 | TENANT | 013–016 | PENDENTE |
 | 3 | ACESSO | 017–020 | PENDENTE |
 | 4 | CADASTROS | 021–025 | PENDENTE |
@@ -97,7 +137,7 @@ Observações da base:
 | 10 | SEGURANÇA | 052–055 | PENDENTE |
 | 11 | PILOTO | 056–064 | PENDENTE |
 
-**Próxima tarefa: 009 — Layout** (aguarda sua autorização). Pendências formais das tarefas 001–007 estão no *Registro de execução* abaixo.
+**Progresso: 8/64 tarefas** (Fase 0 ✅ + 008 ✅). **Próxima tarefa: 009 — Layout** (aguarda sua autorização).
 
 ---
 
@@ -133,17 +173,17 @@ Inspecionar o projeto Next.js existente e produzir o diagnóstico real, corrigin
 
 ### Critérios de conclusão
 
-- [ ] Diagnóstico real entregue e anexado ao PLANO-PROJETO.md §1.
-- [ ] Todas as perguntas de PLANO-PROJETO.md §1.3 respondidas.
-- [ ] Divergências do baseline registradas.
-- [ ] Nenhum arquivo do projeto modificado.
-- [ ] Testes executados e registrados
-- [ ] Documentação correspondente atualizada
-- [ ] Checkpoint apresentado
+- [x] Diagnóstico real entregue e anexado ao PLANO-PROJETO.md §1.
+- [x] Todas as perguntas de PLANO-PROJETO.md §1.3 respondidas.
+- [x] Divergências do baseline registradas.
+- [x] Nenhum arquivo do projeto modificado.
+- [x] Testes executados e registrados
+- [x] Documentação correspondente atualizada
+- [x] Checkpoint apresentado
 
 ### Status
 
-PENDENTE
+CONCLUÍDA
 
 ---
 
@@ -175,16 +215,16 @@ Verificar o ambiente de desenvolvimento e execução necessário para rodar o pr
 
 ### Critérios de conclusão
 
-- [ ] Comandos de instalação, lint, build e dev documentados com resultado real.
-- [ ] Erros/avisos pré-existentes listados.
-- [ ] Requisitos de ambiente descritos.
-- [ ] Testes executados e registrados
-- [ ] Documentação correspondente atualizada
-- [ ] Checkpoint apresentado
+- [x] Comandos de instalação, lint, build e dev documentados com resultado real.
+- [x] Erros/avisos pré-existentes listados.
+- [x] Requisitos de ambiente descritos.
+- [x] Testes executados e registrados
+- [x] Documentação correspondente atualizada
+- [x] Checkpoint apresentado
 
 ### Status
 
-PENDENTE
+CONCLUÍDA
 
 ---
 
@@ -217,17 +257,17 @@ Inventariar dependências diretas e transitivas relevantes, versões, vulnerabil
 
 ### Critérios de conclusão
 
-- [ ] Inventário de dependências documentado.
-- [ ] Resultado da auditoria registrado.
-- [ ] Compatibilidade avaliada.
-- [ ] Nenhuma alteração em package.json/lockfile.
-- [ ] Testes executados e registrados
-- [ ] Documentação correspondente atualizada
-- [ ] Checkpoint apresentado
+- [x] Inventário de dependências documentado.
+- [x] Resultado da auditoria registrado.
+- [x] Compatibilidade avaliada.
+- [x] Nenhuma alteração em package.json/lockfile.
+- [x] Testes executados e registrados
+- [x] Documentação correspondente atualizada
+- [x] Checkpoint apresentado
 
 ### Status
 
-PENDENTE
+CONCLUÍDA
 
 ---
 
@@ -260,16 +300,16 @@ Avaliar qualidade, padrões e reaproveitamento do código existente (páginas, c
 
 ### Critérios de conclusão
 
-- [ ] Relatório de avaliação do código existente entregue.
-- [ ] Lista 'preservar / refatorar / descartar' proposta (sem executar).
-- [ ] Nenhum arquivo modificado.
-- [ ] Testes executados e registrados
-- [ ] Documentação correspondente atualizada
-- [ ] Checkpoint apresentado
+- [x] Relatório de avaliação do código existente entregue.
+- [x] Lista 'preservar / refatorar / descartar' proposta (sem executar).
+- [x] Nenhum arquivo modificado.
+- [x] Testes executados e registrados
+- [x] Documentação correspondente atualizada
+- [x] Checkpoint apresentado
 
 ### Status
 
-PENDENTE
+CONCLUÍDA
 
 ---
 
@@ -301,18 +341,19 @@ Validar a arquitetura proposta em /docs/arquitetura.md contra o projeto real e f
 
 ### Critérios de conclusão
 
-- [ ] arquitetura.md atualizado e consistente com o projeto real.
-- [ ] ADR-003 confirmada ou revisada por você.
-- [ ] Pendências listadas com tarefa-alvo.
-- [ ] Testes executados e registrados
-- [ ] Documentação correspondente atualizada
-- [ ] Checkpoint apresentado
+- [x] arquitetura.md atualizado e consistente com o projeto real.
+- [x] ADR-003 confirmada ou revisada por você.
+- [x] Pendências listadas com tarefa-alvo.
+- [x] Testes executados e registrados
+- [x] Documentação correspondente atualizada
+- [x] Checkpoint apresentado
 
 > ⛔ **PARAR e pedir autorização: confirmar a arquitetura (decisão significativa de arquitetura).**
+> ✅ **Autorização recebida em 2026-10-06: ADR-003 aprovada como proposta.**
 
 ### Status
 
-PENDENTE
+CONCLUÍDA
 
 ---
 
@@ -343,15 +384,15 @@ Definir a estrutura de pastas realmente necessária, a partir do projeto real, s
 
 ### Critérios de conclusão
 
-- [ ] Estrutura documentada e aprovada.
-- [ ] Nenhum diretório criado antes de ser necessário.
-- [ ] Testes executados e registrados
-- [ ] Documentação correspondente atualizada
-- [ ] Checkpoint apresentado
+- [x] Estrutura documentada e aprovada.
+- [x] Nenhum diretório criado antes de ser necessário.
+- [x] Testes executados e registrados
+- [x] Documentação correspondente atualizada
+- [x] Checkpoint apresentado
 
 ### Status
 
-PENDENTE
+CONCLUÍDA
 
 ---
 
@@ -385,16 +426,16 @@ Consolidar decisões, convenções e processo de trabalho em documentação inic
 
 ### Critérios de conclusão
 
-- [ ] Documentos de /docs criados conforme prompt §31.
-- [ ] desenvolvimento.md reproduz o ambiente do zero.
-- [ ] ADRs atualizadas.
-- [ ] Testes executados e registrados
-- [ ] Documentação correspondente atualizada
-- [ ] Checkpoint apresentado
+- [x] Documentos de /docs criados conforme prompt §31.
+- [x] desenvolvimento.md reproduz o ambiente do zero.
+- [x] ADRs atualizadas.
+- [x] Testes executados e registrados
+- [x] Documentação correspondente atualizada
+- [x] Checkpoint apresentado
 
 ### Status
 
-PENDENTE
+CONCLUÍDA
 
 ---
 

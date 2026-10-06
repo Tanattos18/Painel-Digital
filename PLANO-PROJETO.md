@@ -19,47 +19,40 @@
 
 ## 1. Diagnóstico do projeto
 
-### 1.1 Limitação desta análise (leia primeiro)
+### 1.1 Diagnóstico real (Tarefa 001 — concluída em 2026-10-06)
 
-> **Atualização (2026-10-06):** como não havia projeto existente, a base foi criada do zero (Next.js 16.4.0, App Router, React 19.3.0, TypeScript estrito, Tailwind 4, ESLint 9, npm). Os itens [A VERIFICAR] do baseline abaixo agora têm resposta em `TAREFAS.md` (Registro de execução) e `docs/desenvolvimento.md`.
+O projeto foi inspecionado de verdade: `package.json`, `package-lock.json`, `tsconfig.json`,
+`next.config.ts`, `eslint.config.mjs`, CSS global, `src/`, `public/` e repositório Git.
+Esta seção **substitui** a limitação de análise anterior (na primeira sessão não havia código
+acessível; a base foi criada em seguida e agora está verificada).
 
-O prompt determina que, antes de qualquer proposta, todo o projeto existente seja inspecionado
-(`package.json`, `package-lock.json`, `src/`, `public/`, configurações de TypeScript, Next.js,
-Tailwind e ESLint, componentes, páginas, scripts).
+### 1.2 Baseline real (confirmado contra o código)
 
-**Nesta sessão não recebi o código do projeto Next.js.** Só o documento de especificação
-foi anexado; não há `package.json` nem diretório `src/` acessível. Portanto:
-
-- **Não vou inventar um diagnóstico** de arquivos que não vi.
-- O que está abaixo em "baseline assumido" vem **exclusivamente do prompt** ("o projeto atual utiliza Next.js, TypeScript, Tailwind CSS, ESLint").
-- A **Tarefa 001 (Analisar projeto)** foi desenhada para fechar essa lacuna: ela produz o diagnóstico real e corrige este documento, caso algo difira.
-
-**O que preciso de você para a Tarefa 001:** o projeto compactado (sem `node_modules` e sem `.next`),
-ou a saída de `tree -L 3 -I "node_modules|.next"` + conteúdo de `package.json`, `tsconfig.json`,
-`next.config.*`, `tailwind.config.*` / CSS global e `eslint.config.*`.
-
-### 1.2 Baseline assumido (somente do prompt)
-
-| Item | Valor assumido | Situação |
+| Item | Valor real | Situação |
 |---|---|---|
-| Framework | Next.js | [A VERIFICAR] versão e roteador (App Router × Pages Router) |
-| Linguagem | TypeScript | [A VERIFICAR] `strict` ativo? |
-| Estilo | Tailwind CSS | [A VERIFICAR] versão (v3 × v4) e forma de configuração |
-| Lint | ESLint | [A VERIFICAR] regras ativas, `no-explicit-any` |
-| Gerenciador de pacotes | desconhecido | [A VERIFICAR] npm / pnpm / yarn |
+| Framework | Next.js **16.4.0** — **App Router** (Turbopack) | [DEFINIDO] |
+| Linguagem | TypeScript **5.9.3** — `strict: true` | [DEFINIDO] |
+| Estilo | Tailwind CSS **4.3.3** via `@tailwindcss/turbopack` (CSS-first, sem `tailwind.config`) | [DEFINIDO] |
+| Lint | ESLint **9.39.5** + `eslint-config-next` 16.4.0 (flat config: `core-web-vitals` + `typescript`) | [DEFINIDO] |
+| Gerenciador de pacotes | **npm** (`package-lock.json` presente) | [DEFINIDO] |
+| Runtime | Node.js — base criada com **22**; validada nesta máquina com **24.21.0** | [DEFINIDO] |
+| Estrutura | `src/` com organização **por feature**; alias `@/*` → `./src/*` | [DEFINIDO] |
+| Config Next | `cacheComponents` e `partialPrefetching` **ativos** (afetam leitura de dados dinâmicos) | [DEFINIDO — ver docs/desenvolvimento.md] |
 | Banco de dados | nenhum | Prompt manda **não** implementar ainda |
 | Autenticação | nenhuma | idem |
 | Tempo real | nenhum | idem |
-| Testes automatizados | desconhecido | [A VERIFICAR] |
-| Git | desconhecido | [A VERIFICAR] |
+| Testes automatizados | nenhum — apenas `tests/tenant-isolation/` vazio | [A VERIFICAR] quando a 1ª regra de negócio existir |
+| Git | branch `main` → `origin` (GitHub `Tanattos18/Painel-Digital`) | [DEFINIDO] |
 
-### 1.3 Perguntas que a Tarefa 001 precisa responder
+### 1.3 Respostas (Tarefa 001)
 
-1. App Router ou Pages Router? (afeta toda a estrutura de pastas e a estratégia de API.)
-2. Qual a versão do Next.js e do React? (Route Handlers, Server Actions e `middleware` mudam entre versões.)
-3. Onde a aplicação será hospedada no piloto: máquina local, VPS, ou plataforma serverless? (determina o tempo real — ver seção 11.)
-4. Há código existente que deva ser preservado ou é um projeto recém-criado (`create-next-app`)?
-5. O repositório está sob Git? Há branch de trabalho?
+| # | Pergunta da Tarefa 001 | Resposta |
+|---|---|---|
+| 1 | App Router ou Pages Router? | **App Router** — `src/app/` com route groups `(admin)`, `(auth)`, `(recepcao)`, `display/` e `api/` |
+| 2 | Qual a versão do Next.js e do React? | **Next.js 16.4.0** e **React 19.3.0** — atenção às features novas (`cacheComponents`, `partialPrefetching`) e ao `AGENTS.md` que exige consultar a documentação local do Next |
+| 3 | Onde a aplicação será hospedada no piloto? | **[PENDENTE]** — decisão conjunta com a tecnologia de tempo real (Tarefa 038 ⛔) |
+| 4 | Há código existente a preservar ou é projeto novo? | **Projeto novo** (`create-next-app`) — nada pré-existente além da base; não há código legado a preservar |
+| 5 | O repositório está sob Git? Há branch de trabalho? | **Sim** — branch `main`, remoto GitHub configurado, sem branches de trabalho |
 
 ---
 
