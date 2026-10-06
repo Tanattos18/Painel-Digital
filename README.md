@@ -16,7 +16,7 @@
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?logo=tailwindcss&logoColor=white&style=flat-square)
 ![ESLint](https://img.shields.io/badge/ESLint-4B32C3?logo=eslint&logoColor=white&style=flat-square)
 
-> 🚧 **Em desenvolvimento — Fase 1 (base da aplicação).** **Progresso: 8/64 tarefas.**
+> 🚧 **Em desenvolvimento — Fase 1 (base da aplicação).** **Progresso: 9/64 tarefas.**
 > A **Fase 0 (preparação) está concluída**: diagnóstico real, arquitetura aprovada e documentação consolidada.
 > **Nenhuma funcionalidade descrita neste README foi implementada ainda.**
 
@@ -140,6 +140,7 @@ Após o tempo configurado, o painel **retoma automaticamente** a playlist de mí
 | 🎯 **Fase 0 — Preparação (001–007)** | ✅ **Concluída (7/7)** — diagnóstico real, ADR-003 aprovada, docs consolidados |
 | 📄 Documentação (plano, tarefas, arquitetura) | ✅ Atualizada — com *Registro de execução* |
 | 🏗️ Base da aplicação (Tarefa 008) | ✅ Concluída — install/lint/build/dev validados (0 avisos de lint) |
+| 🧱 Layouts base (Tarefa 009) | ✅ Concluída — rotas `/login`, `/dashboard`, `/fila`, `/display` com layouts auth, admin, recepção e painel 16:9 |
 | 📁 Estrutura de pastas (Tarefa 006) | ✅ Aplicada — `src/` conforme `docs/arquitetura.md` §5 |
 | 💻 Funcionalidades | ⬜ Nenhuma implementada (nenhuma tela, regra ou API) |
 | 📦 Dependências | ✅ Instaladas (357 pacotes) — `npm audit`: 5 altas só na cadeia de lint |
@@ -149,7 +150,7 @@ Após o tempo configurado, o painel **retoma automaticamente** a playlist de mí
 | ☁️ Hospedagem | ⏸️ Não definida — aguarda decisão |
 | 🧪 Testes automatizados | ⬜ Estrutura `tests/` criada; suíte vazia |
 
-> **Progresso: 8/64 tarefas** · **Próxima tarefa:** 009 — Layout *(aguarda autorização)*.
+> **Progresso: 9/64 tarefas** · **Próxima tarefa:** 010 — Navegação.
 
 ---
 
@@ -456,6 +457,7 @@ A documentação do projeto está organizada em:
 | `TAREFAS.md` | 64 tarefas em 12 fases, com checklist, checkpoint e *Registro de execução* |
 | `docs/arquitetura.md` | Arquitetura, camadas, fluxos e registro de decisões (ADRs) |
 | `docs/desenvolvimento.md` | Como rodar, convenções, fluxo de commits e definição de pronto |
+| `docs/analise-checklist.md` | Análise de consistência e riscos do roadmap (2026-10-06) |
 | `docs/api.md`, `banco-de-dados.md`, `painel.md`, `seguranca.md`, `tempo-real.md`, `testes.md` | Esqueletos — preenchidos conforme as fases |
 
 > 📁 **Insumos originais** (fora do repositório, na pasta do workspace `doc_projetos/prompts/`):

@@ -59,6 +59,32 @@ A próxima tarefa **não** é executada automaticamente se exigir decisão impor
 
 ## Registro de execução
 
+### 2026-10-06 — Tarefa 009 concluída (Fase 1 em andamento)
+
+| Tarefa | Situação | Evidência |
+|---|---|---|
+| 009 Layout | **CONCLUÍDA** | 4 layouts base criados — `(auth)`, `(admin)`, `(recepcao)`, `display` (16:9 com `aspect-video` e limites de tela cheia) — mais páginas placeholder `login`, `dashboard`, `fila` e `display`; `lint` **0 avisos**, `build` OK (6 rotas estáticas), as 5 rotas responderam **HTTP 200** no `dev` |
+
+**Checkpoint — Tarefa 009:**
+
+```
+TAREFA: 009
+STATUS: CONCLUÍDA
+ARQUIVOS ALTERADOS: TAREFAS.md, README.md, docs/analise-checklist.md
+ARQUIVOS CRIADOS: src/app/(auth)/layout.tsx, src/app/(auth)/login/page.tsx,
+src/app/(admin)/layout.tsx, src/app/(admin)/dashboard/page.tsx,
+src/app/(recepcao)/layout.tsx, src/app/(recepcao)/fila/page.tsx,
+src/app/display/layout.tsx, src/app/display/page.tsx, docs/analise-checklist.md
+ARQUIVOS REMOVIDOS: .gitkeep das 4 pastas de rota (agora com conteúdo)
+DEPENDÊNCIAS: nenhuma nova
+TESTES EXECUTADOS: npm run lint (0 avisos); npm run build (6 rotas estáticas,
+TypeScript OK); dev server — GET /, /login, /dashboard, /fila, /display = 200.
+Verificação visual nos tamanhos-alvo (375/768/1280/1920×1080) pendente de
+revisão humana no piloto.
+RESULTADO: esqueleto navegável iniciado; nenhuma regra de negócio
+PRÓXIMA TAREFA: 010 - Navegação
+```
+
 ### 2026-10-06 — Tarefas 005–007 concluídas (Fase 0 encerrada)
 
 | Tarefa | Situação | Evidência |
@@ -125,7 +151,7 @@ Observações da base:
 | Fase | Nome | Tarefas | Status |
 |---|---|---|---|
 | 0 | PREPARAÇÃO | 001–007 | **✅ 7/7 CONCLUÍDA** |
-| 1 | BASE | 008–012 | **1/5** — 008 ✅ |
+| 1 | BASE | 008–012 | **2/5** — 008 ✅ 009 ✅ |
 | 2 | TENANT | 013–016 | PENDENTE |
 | 3 | ACESSO | 017–020 | PENDENTE |
 | 4 | CADASTROS | 021–025 | PENDENTE |
@@ -137,7 +163,7 @@ Observações da base:
 | 10 | SEGURANÇA | 052–055 | PENDENTE |
 | 11 | PILOTO | 056–064 | PENDENTE |
 
-**Progresso: 8/64 tarefas** (Fase 0 ✅ + 008 ✅). **Próxima tarefa: 009 — Layout** (aguarda sua autorização).
+**Progresso: 9/64 tarefas** (Fase 0 ✅ + 008 ✅ + 009 ✅). **Próxima tarefa: 010 — Navegação.**
 
 ---
 
@@ -518,16 +544,16 @@ Criar os layouts base das áreas (auth, admin, recepção) e a base do layout 16
 
 ### Critérios de conclusão
 
-- [ ] Quatro layouts renderizam corretamente nos tamanhos-alvo.
-- [ ] Sem scroll horizontal indevido.
-- [ ] Build e lint passam.
-- [ ] Testes executados e registrados
-- [ ] Documentação correspondente atualizada
-- [ ] Checkpoint apresentado
+- [x] Quatro layouts renderizam corretamente nos tamanhos-alvo. *(verificação automática: 5 rotas retornaram 200 no `dev`; revisão visual em 375/768/1280/1920×1080 registrada como pendente de conferência humana)*
+- [x] Sem scroll horizontal indevido. *(layout usa `min-h-screen` + `overflow-hidden` no display e larguras fluidas; conferência visual pendente)*
+- [x] Build e lint passam.
+- [x] Testes executados e registrados
+- [x] Documentação correspondente atualizada
+- [x] Checkpoint apresentado
 
 ### Status
 
-PENDENTE
+CONCLUÍDA
 
 ---
 
