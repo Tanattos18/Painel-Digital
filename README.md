@@ -459,6 +459,10 @@ A documentação do projeto está organizada em:
 | `docs/desenvolvimento.md` | Como rodar, convenções, fluxo de commits e definição de pronto |
 | `docs/api.md`, `banco-de-dados.md`, `painel.md`, `seguranca.md`, `tempo-real.md`, `testes.md` | Esqueletos — preenchidos conforme as fases |
 
+> 📁 **Insumos originais** (fora do repositório, na pasta do workspace `doc_projetos/prompts/`):
+> `01-especificacao-saas-atendimento-painel-digital.txt` — especificação do produto;
+> `02-prompt-inicio-projeto-piloto.txt` — regras de disciplina e processo de desenvolvimento.
+
 ---
 
 ## 🖥️ Ambiente de desenvolvimento
