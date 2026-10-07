@@ -42,3 +42,9 @@ next-env.d.ts
 
 # permitir o exemplo de ambiente
 !.env.example
+
+# prisma (generator com output customizado, se usado)
+/src/generated/prisma
+
+# contexto local do CLI do Neon (contém preferências, não credenciais)
+.neon

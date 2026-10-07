@@ -33,4 +33,5 @@ export function optionalEnv(name: string, fallback: string): string {
 
 export const env = {
   nodeEnv: readNodeEnv(),
+  databaseUrl: optionalEnv("DATABASE_URL", ""),
 } as const;

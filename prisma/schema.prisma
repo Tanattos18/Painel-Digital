@@ -1,0 +1,27 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum TenantStatus {
+  ATIVO
+  INATIVO
+}
+
+model Tenant {
+  id           String       @id
+  nome         String
+  nomeFantasia String?      @map("nome_fantasia")
+  telefone     String?
+  email        String?
+  endereco     String?      @map("endereco")
+  status       TenantStatus @default(ATIVO)
+  createdAt    DateTime     @default(now()) @map("created_at")
+  updatedAt    DateTime     @updatedAt @map("updated_at")
+
+  @@map("tenants")
+}
