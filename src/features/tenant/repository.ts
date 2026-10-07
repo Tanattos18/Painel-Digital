@@ -34,6 +34,7 @@ function toTenant(row: TenantRow): Tenant {
     status: row.status,
     fusoHorario: row.fusoHorario,
     duracaoChamadaSegundos: row.duracaoChamadaSegundos,
+    logoPath: row.logoPath,
     createdAt: row.createdAt,
     updatedAt: row.updatedAt,
   };
@@ -139,6 +140,39 @@ export const tenantRepository = {
           entidadeId: tenantId,
           dadosAntes: antesSnapshot,
           dadosDepois: dados,
+        },
+      });
+      return toTenant(linha);
+    });
+  },
+
+  /**
+   * Atualiza o caminho do logo (nulo para remover) e audita na mesma
+   * transação. Sem mudança, não grava.
+   */
+  async setLogo(logoPath: string | null): Promise<Tenant> {
+    const { tenantId } = getTenantContext();
+    return runScoped(tenantId, async (tx) => {
+      const antes = await tx.tenant.findUnique({ where: { id: tenantId } });
+      if (!antes) {
+        throw new Error(`Empresa não encontrada: ${tenantId}`);
+      }
+      if (antes.logoPath === logoPath) {
+        return toTenant(antes);
+      }
+      const linha = await tx.tenant.update({
+        where: { id: tenantId },
+        data: { logoPath },
+      });
+      await tx.auditLog.create({
+        data: {
+          id: randomUUID(),
+          tenantId,
+          acao: "UPDATE",
+          entidade: "tenant",
+          entidadeId: tenantId,
+          dadosAntes: { logoPath: antes.logoPath },
+          dadosDepois: { logoPath },
         },
       });
       return toTenant(linha);

@@ -22,6 +22,7 @@ model Tenant {
   status                TenantStatus @default(ATIVO)
   fusoHorario           String       @default("America/Sao_Paulo") @map("fuso_horario")
   duracaoChamadaSegundos Int          @default(10) @map("duracao_chamada_segundos")
+  logoPath              String?      @map("logo_path")
   createdAt             DateTime     @default(now()) @map("created_at")
   updatedAt             DateTime     @updatedAt @map("updated_at")
 

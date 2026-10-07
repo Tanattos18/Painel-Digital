@@ -42,4 +42,6 @@ export const env = {
     "DEV_TENANT_ID",
     "00000000-0000-4000-8000-000000000001",
   ),
+  /** Base do armazenamento de arquivos (logo; mídia na Tarefa 043). */
+  storageDir: optionalEnv("STORAGE_DIR", "storage"),
 } as const;

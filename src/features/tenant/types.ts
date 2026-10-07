@@ -10,6 +10,7 @@ export type Tenant = {
   status: TenantStatus;
   fusoHorario: string;
   duracaoChamadaSegundos: number;
+  logoPath: string | null;
   createdAt: Date;
   updatedAt: Date;
 };

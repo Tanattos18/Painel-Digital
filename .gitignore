@@ -48,3 +48,9 @@ next-env.d.ts
 
 # contexto local do CLI do Neon (contém preferências, não credenciais)
 .neon
+
+# arquivos de tenants (logo; mídia na Tarefa 043)
+/storage
+
+# logs locais
+*.log
