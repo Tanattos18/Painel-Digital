@@ -40,6 +40,7 @@ por tenant (custo/operação altos para o início).
 | `status` | enum `TenantStatus` | `ATIVO` (padrão) / `INATIVO` |
 | `fuso_horario` | TEXT NOT NULL | fuso IANA do tenant, padrão `America/Sao_Paulo` (Tarefa 014) |
 | `duracao_chamada_segundos` | INTEGER NOT NULL | duração da chamada no painel, padrão `10`, faixa 3–300 (Tarefa 014) |
+| `logo_path` | TEXT nullable | caminho do logo no storage, **sempre com prefixo `{tenantId}/`** (Tarefa 015) |
 | `created_at` / `updated_at` | TIMESTAMP(3) | automáticos |
 
 ### Auditoria (tabela `audit_log`, Tarefa 014)
@@ -56,7 +57,7 @@ por tenant (custo/operação altos para o início).
 
 - Tabela nasce com **RLS `FORCE`** + policy `tenant_id = current_setting('app.tenant_id')`.
 - O repositório grava o log **na mesma transação** da alteração (ou nada, se não
-  houve mudança real).
+  houve mudança real). Upload/remoção de logo também audita (`logoPath` antes/depois).
 - `npm run seed` cria a empresa de desenvolvimento (id em `DEV_TENANT_ID`).
 
 ## Padrão de repositório (obrigatório para as próximas entidades)
@@ -76,6 +77,11 @@ Toda tabela de domínio nova deve nascer com a **mesma policy de RLS**
 
 - `prisma/migrations/0_init_tenant/migration.sql` — enum + tabela `tenants` +
   RLS. Gerada por `prisma migrate diff` e completada com o SQL de RLS.
+- `prisma/migrations/20261007003949_tenant_config_audit/` — colunas de
+  configuração (`fuso_horario`, `duracao_chamada_segundos`) + `audit_log`
+  com RLS `FORCE` (Tarefa 014).
+- `prisma/migrations/20261007011812_tenant_logo/` — coluna `logo_path`
+  (Tarefa 015).
 - **Reprodutível do zero:** `npm run db:deploy` em banco limpo aplica todas as
   migrações pendentes.
 

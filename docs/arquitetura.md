@@ -318,7 +318,7 @@ Detalhamento futuro em `/docs/seguranca.md`.
 | ADR-007 | Autenticação de usuários | **PENDENTE** | 017 |
 | ADR-008 | Token de painel com hash, revogável, expirável | PROPOSTA (segurança: confirmar) | 035 |
 | ADR-009 | Tempo real (recomendado para o piloto: SSE atrás de interface abstrata) | **PENDENTE** | 038 |
-| ADR-010 | Armazenamento de mídia | **PENDENTE** | 043 |
+| ADR-010 | Armazenamento de mídia | **PARCIALMENTE IMPLEMENTADA** (2026-10-07): opção A **disco local** com abstração `src/lib/storage` para o logo (Tarefa 015); mídia completa/objeto continua pendente (043) | 015 · 043 |
 | ADR-011 | Persistir antes de emitir evento; transição de fila atômica | PROPOSTA | 026/040 |
 | ADR-012 | Fuso horário por tenant; armazenamento em UTC | **IMPLEMENTADA** (2026-10-07): coluna `fuso_horario` + `lib/time.ts` | 014 |
 
@@ -331,7 +331,7 @@ Cada ADR aprovada ganhará seção própria (contexto, opções, decisão, conse
 1. ~~Validar tudo contra o projeto real (Tarefas 001–004).~~ ✅ Concluído em 2026-10-06.
 2. ~~Confirmar App Router × Pages Router.~~ ✅ **App Router** confirmado (Tarefa 001).
 3. Decidir hospedagem do piloto (influencia ADR-009) — Tarefa 038 ⛔.
-4. Obter autorização para ADR-007, 009, 010 — tarefas 017, 038, 043 ⛔. *(ADR-005 e 006 aprovadas em 2026-10-06.)*
+4. Obter autorização para ADR-007 e ADR-009 — tarefas 017 e 038 ⛔. *(ADR-005 e 006 aprovadas em 2026-10-06; ADR-010 decidiu o logo em 2026-10-07 — mídia completa na 043.)*
 5. Sub-decisões do PLANO §7.3 (e-mail global × por tenant; identificação da empresa no login) — decidir na Tarefa 017.
 
 ---

@@ -22,7 +22,7 @@ Estas tarefas **não começam** sem sua autorização explícita, porque envolve
 |---|---|
 | 005 Definir arquitetura | confirmar a arquitetura (decisão significativa de arquitetura). |
 | 013 Empresa | banco de dados, ORM e modelo multi-tenant (ADR-005 e ADR-006). |
-| 015 Logo | onde armazenar arquivos (decisão de armazenamento). |
+| 015 Logo | ~~onde armazenar arquivos~~ — **decidido em 2026-10-07: disco local com abstração `Storage`** (mídia completa e possivelmente objeto na 043). |
 | 017 Autenticação | estratégia de autenticação (ADR-007). |
 | 034 Identificação | política de expiração/rotação do token (segurança). |
 | 038 Arquitetura real-time | tecnologia de tempo real, hospedagem e custos (ADR-009). |
@@ -58,6 +58,40 @@ XXX
 A próxima tarefa **não** é executada automaticamente se exigir decisão importante.
 
 ## Registro de execução
+
+### 2026-10-07 — Tarefa 015 concluída (Fase 2: 3/4)
+
+| Tarefa | Situação | Evidência |
+|---|---|---|
+| 015 Logo | **CONCLUÍDA** | Decisão de armazenamento **A (disco local)** aprovada pelo solicitante; abstração `src/lib/storage` (`Storage` + `criarStorageLocal` com anti path-traversal e escrita atômica; fábrica `getStorage()` para trocar na 043); validação por **conteúdo** (magic bytes PNG/JPEG/WEBP — SVG fora), limites 1 MiB e 16–4096 px, nome gerado pelo servidor com prefixo do tenant; coluna `logo_path` (migração `20261007011812_tenant_logo`); upload/remoção com auditoria na mesma transação; `GET /api/logo` (ETag/304, `Cache-Control: private`, caminho sempre do BD); card de logo em `/empresa`; **37/37 testes**; suíte agora carrega `.env` via `dotenv` no `vitest.config.mts` (determinístico) |
+
+**Checkpoint — Tarefa 015:**
+
+```
+TAREFA: 015
+STATUS: CONCLUÍDA
+DECISÃO: armazenamento A — disco local com abstração Storage (aprovada);
+SVG fica de fora; ADR-010 registrada como PARCIAL (mídia completa na 043)
+ARQUIVOS ALTERADOS: prisma/schema.prisma, .gitignore, .env.example,
+env.ts, tenant/{types,repository,service}.ts, empresa/{actions,page}.tsx,
+vitest.config.mts, docs/{arquitetura,banco-de-dados,testes}.md, TAREFAS.md, README.md
+ARQUIVOS CRIADOS: prisma/migrations/20261007011812_tenant_logo,
+src/lib/storage/{types,local,index}.ts, src/features/tenant/logo.ts,
+src/app/api/logo/route.ts, src/app/(admin)/empresa/logo-form.tsx,
+docs/armazenamento.md, tests/helpers/imagens.ts, tests/features/logo.test.ts,
+tests/lib/storage-local.test.ts, tests/tenant/logo-integration.test.ts
+ARQUIVOS REMOVIDOS: nenhum
+DEPENDÊNCIAS: nenhuma nova
+TESTES EXECUTADOS: npm test = 37/37 (34 unit + 3 integração RLS/isolamento); npm run lint (0 avisos); npm run build (9 rotas,
+/api/logo dinâmica); dev — 7 páginas = 200; smoke HTTP manual:
+upload no dev tenant → GET /api/logo 200 image/png + ETag → 304 no
+reenvio com If-None-Match → remoção volta a 404 (validado com servidor
+reiniciado — o dev anterior segurava o Prisma Client antigo em memória)
+RESULTADO: logo enviável, exibível e removível em /empresa; arquivos
+inválidos rejeitados com mensagem clara; isolamento por tenant provado
+(contexto B não lê o logo de A); armazenamento preparado para a 043
+PRÓXIMA TAREFA: 016 - Identidade visual (cores de marca + logo nas áreas)
+```
 
 ### 2026-10-07 — Tarefa 014 concluída (Fase 2: 2/4)
 
@@ -295,7 +329,7 @@ Observações da base:
 |---|---|---|---|
 | 0 | PREPARAÇÃO | 001–007 | **✅ 7/7 CONCLUÍDA** |
 | 1 | BASE | 008–012 | **✅ 5/5 CONCLUÍDA** (M1 atingido) |
-| 2 | TENANT | 013–016 | **2/4** em andamento |
+| 2 | TENANT | 013–016 | **3/4** em andamento |
 | 3 | ACESSO | 017–020 | PENDENTE |
 | 4 | CADASTROS | 021–025 | PENDENTE |
 | 5 | ATENDIMENTO | 026–032 | PENDENTE |
@@ -306,7 +340,7 @@ Observações da base:
 | 10 | SEGURANÇA | 052–055 | PENDENTE |
 | 11 | PILOTO | 056–064 | PENDENTE |
 
-**Progresso: 14/64 tarefas** (Fases 0 e 1 ✅, Fase 2 em andamento). **Próxima tarefa: 015 — Logo ⛔** (decisão de armazenamento de arquivos).
+**Progresso: 15/64 tarefas** (Fases 0 e 1 ✅, Fase 2 em andamento). **Próxima tarefa: 016 — Identidade visual** (cores de marca e logo nas áreas admin, recepção e painel).
 
 ---
 
@@ -944,18 +978,19 @@ Permitir enviar e exibir o logo da empresa, com validação segura.
 
 ### Critérios de conclusão
 
-- [ ] Logo enviado, exibido e substituível.
-- [ ] Arquivos inválidos rejeitados com mensagem clara.
-- [ ] Isolamento por tenant verificado.
-- [ ] Testes executados e registrados
-- [ ] Documentação correspondente atualizada
-- [ ] Checkpoint apresentado
+- [x] Logo enviado, exibido e substituível.
+- [x] Arquivos inválidos rejeitados com mensagem clara.
+- [x] Isolamento por tenant verificado.
+- [x] Testes executados e registrados
+- [x] Documentação correspondente atualizada
+- [x] Checkpoint apresentado
 
-> ⛔ **PARAR e pedir autorização: onde armazenar arquivos (decisão de armazenamento).**
+> ⛔ ~~PARAR e pedir autorização: onde armazenar arquivos (decisão de armazenamento).~~
+> **Autorização recebida em 2026-10-07: opção A — disco local com abstração `Storage`.**
 
 ### Status
 
-PENDENTE
+CONCLUÍDA
 
 ---
 
