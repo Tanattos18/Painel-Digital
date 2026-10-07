@@ -12,10 +12,15 @@ async function runScoped<T>(
   tenantId: string,
   fn: (tx: ScopedTx) => Promise<T>,
 ): Promise<T> {
-  return getPrisma().$transaction(async (tx) => {
-    await tx.$queryRaw`SELECT set_config('app.tenant_id', ${tenantId}, true)`;
-    return fn(tx);
-  });
+  // maxWait/timeout acima do padrão (2s/5s): o Neon free tier pode levar
+  // alguns segundos para acordar, o que derrubava a transação com P2028.
+  return getPrisma().$transaction(
+    async (tx) => {
+      await tx.$queryRaw`SELECT set_config('app.tenant_id', ${tenantId}, true)`;
+      return fn(tx);
+    },
+    { maxWait: 10_000, timeout: 15_000 },
+  );
 }
 
 function toTenant(row: TenantRow): Tenant {
