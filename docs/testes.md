@@ -30,6 +30,34 @@
 - consulta com contexto → apenas as linhas do próprio tenant
 - limpeza no final (delete com contexto)
 
+### `tests/tenant/update-schema.test.ts` — unitária (Tarefa 014)
+
+- entrada válida de formulário (tudo string) é normalizada
+- nome ausente/vazio, e-mail malformado, fuso desconhecido e duração fora
+  da faixa 3–300 são **rejeitados no backend**
+
+### `tests/lib/time.test.ts` — unitária (Tarefa 014)
+
+- validação de fuso IANA
+- `formatarComFuso` aplica o fuso do tenant a datas de exemplo
+  (12:00 UTC → 09:00 São Paulo; 08:00 Manaus)
+
+### `tests/tenant/tenant-update.test.ts` — integração (Tarefa 014)
+
+- grava dados + configurações com contexto e relê
+- **auditoria**: exatamente 1 registro `UPDATE` com antes/depois
+  (segunda chamada idempotente; terceira rejeitada no backend)
+- `audit_log` sem contexto → **0 linhas** (RLS)
+- limpeza com cascata (`audit_log` cai junto com o tenant)
+
+## Resultados (Tarefa 014 — 2026-10-07)
+
+| Suíte | Resultado |
+|---|---|
+| Unitárias (contexto 8 + update-schema 8 + time 4) | **20 — todas passando** |
+| Integração (isolation 1 + update/auditoria 1) | **2 — passando** |
+| **Total** | **24/24 passando** (`npm test`) |
+
 ## Resultados (Tarefa 013 — 2026-10-06)
 
 | Suíte | Resultado |

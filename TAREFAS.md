@@ -59,6 +59,38 @@ A próxima tarefa **não** é executada automaticamente se exigir decisão impor
 
 ## Registro de execução
 
+### 2026-10-07 — Tarefa 014 concluída (Fase 2: 2/4)
+
+| Tarefa | Situação | Evidência |
+|---|---|---|
+| 014 Configuração | **CONCLUÍDA** | Página `/empresa` no menu admin com formulário (dados + fuso + duração da chamada) e **server action** validada no backend (`parseUpdateTenant`: nome, e-mail, fuso IANA, duração 3–300); colunas `fuso_horario`/`duracao_chamada_segundos` + tabela `audit_log` com RLS `FORCE` (migração `001`); auditoria gravada **na mesma transação** (só quando há mudança real); ADR-012 implementada (armazenar UTC, exibir no fuso do tenant — `lib/time.ts`); seed `npm run seed` cria a empresa demo; **24/24 testes**; rota dinâmica com `instant = false` (Next 16/cacheComponents) |
+
+**Checkpoint — Tarefa 014:**
+
+```
+TAREFA: 014
+STATUS: CONCLUÍDA
+ARQUIVOS ALTERADOS: prisma/schema.prisma, package.json, env.ts,
+navigation.ts, tenant/{schema,repository,service,types}.ts,
+docs/{banco-de-dados,arquitetura,testes}.md, TAREFAS.md, README.md
+ARQUIVOS CRIADOS: prisma/migrations/20261007003949_tenant_config_audit,
+src/lib/time.ts, src/lib/context/dev-tenant.ts, src/constants/timezones.ts,
+scripts/seed.mjs, src/app/(admin)/empresa/{page,empresa-form,actions}.tsx|ts,
+tests/tenant/update-schema.test.ts, tests/tenant/tenant-update.test.ts,
+tests/lib/time.test.ts
+ARQUIVOS REMOVIDOS: nenhum
+DEPENDÊNCIAS: nenhuma nova
+TESTES EXECUTADOS: npm test = 24/24 (20 unit + 4 integração/RLS);
+npm run lint (0 avisos); npm run build (8 rotas, /empresa dinâmica);
+dev — 7 páginas = 200; /empresa renderiza os dados do tenant demo;
+seed idempotente. Observação: migrate reset derrubou os grants do
+painel_app — reaplicados e documentado em docs/banco-de-dados.md.
+RESULTADO: configuração da empresa operante (dados + fuso + duração da
+chamada) com auditoria e RLS; contexto provisório DEV_TENANT_ID isolado
+num módulo (substituído na 017)
+PRÓXIMA TAREFA: 015 - Logo ⛔ (decisão de armazenamento)
+```
+
 ### 2026-10-06 — Tarefa 013 concluída (Fase 2: 1/4)
 
 | Tarefa | Situação | Evidência |
@@ -263,7 +295,7 @@ Observações da base:
 |---|---|---|---|
 | 0 | PREPARAÇÃO | 001–007 | **✅ 7/7 CONCLUÍDA** |
 | 1 | BASE | 008–012 | **✅ 5/5 CONCLUÍDA** (M1 atingido) |
-| 2 | TENANT | 013–016 | **1/4** em andamento |
+| 2 | TENANT | 013–016 | **2/4** em andamento |
 | 3 | ACESSO | 017–020 | PENDENTE |
 | 4 | CADASTROS | 021–025 | PENDENTE |
 | 5 | ATENDIMENTO | 026–032 | PENDENTE |
@@ -274,7 +306,7 @@ Observações da base:
 | 10 | SEGURANÇA | 052–055 | PENDENTE |
 | 11 | PILOTO | 056–064 | PENDENTE |
 
-**Progresso: 13/64 tarefas** (Fases 0 e 1 ✅, Fase 2 em andamento). **Próxima tarefa: 014 — Configuração**.
+**Progresso: 14/64 tarefas** (Fases 0 e 1 ✅, Fase 2 em andamento). **Próxima tarefa: 015 — Logo ⛔** (decisão de armazenamento de arquivos).
 
 ---
 
@@ -868,16 +900,16 @@ Permitir configurar os dados da empresa e as configurações gerais (inclusive f
 
 ### Critérios de conclusão
 
-- [ ] Dados e configurações gravados e lidos.
-- [ ] Validação feita no backend.
-- [ ] Auditoria registra a alteração.
-- [ ] Testes executados e registrados
-- [ ] Documentação correspondente atualizada
-- [ ] Checkpoint apresentado
+- [x] Dados e configurações gravados e lidos.
+- [x] Validação feita no backend.
+- [x] Auditoria registra a alteração.
+- [x] Testes executados e registrados
+- [x] Documentação correspondente atualizada
+- [x] Checkpoint apresentado
 
 ### Status
 
-PENDENTE
+CONCLUÍDA
 
 ---
 

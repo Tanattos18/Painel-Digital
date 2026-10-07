@@ -146,6 +146,7 @@ Após o tempo configurado, o painel **retoma automaticamente** a playlist de mí
 | 🧩 Componentes (Tarefa 011) | ✅ Concluída — 9 componentes em `src/components/ui/`, demo em `/dev/components`, docs em `docs/componentes.md` |
 | 🎨 Sistema visual (Tarefa 012) | ✅ Concluída — tokens `--color-brand-*`, contraste AA+, `docs/sistema-visual.md` — **Fase 1 completa (5/5), M1 atingido** |
 | 🏢 Empresa/Tenant (Tarefa 013) | ✅ Concluída — PostgreSQL + Prisma 6 (ADR-005), coluna + RLS (ADR-006), migração do zero no Neon, `TenantContext` obrigatório, **9/9 testes** — Fase 2 em andamento |
+| ⚙️ Configuração (Tarefa 014) | ✅ Concluída — página `/empresa` (dados, fuso horário, duração da chamada), validação no backend, auditoria `audit_log` com RLS, seed da empresa demo, **24/24 testes** |
 | 📁 Estrutura de pastas (Tarefa 006) | ✅ Aplicada — `src/` conforme `docs/arquitetura.md` §5 |
 | 💻 Funcionalidades | ⬜ Nenhuma implementada (nenhuma tela, regra ou API) |
 | 📦 Dependências | ✅ Instaladas — `prisma`, `@prisma/client`, `vitest`, `dotenv` adicionados (autorizados) |
@@ -153,9 +154,9 @@ Após o tempo configurado, o painel **retoma automaticamente** a playlist de mí
 | 🔐 Autenticação | ⏸️ Não definida — aguarda decisão (Tarefa 017) |
 | ⚡ Tempo real | ⏸️ Não definido — aguarda decisão (Tarefa 038) |
 | ☁️ Hospedagem | ⏸️ Não definida — aguarda decisão |
-| 🧪 Testes automatizados | ✅ Vitest — **9/9 passando** (8 unit + 1 integração RLS) |
+| 🧪 Testes automatizados | ✅ Vitest — **24/24 passando** (20 unit + 4 integração/RLS) |
 
-> **Progresso: 13/64 tarefas** · **Próxima tarefa:** 014 — Configuração.
+> **Progresso: 14/64 tarefas** · **Próxima tarefa:** 015 — Logo ⛔ *(decisão de armazenamento)*.
 
 ---
 

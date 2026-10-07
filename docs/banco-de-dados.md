@@ -38,7 +38,26 @@ por tenant (custo/operação altos para o início).
 | `email` | TEXT | opcional (sub-decisão de login/e-mail adiada para a Tarefa 017) |
 | `endereco` | TEXT | opcional |
 | `status` | enum `TenantStatus` | `ATIVO` (padrão) / `INATIVO` |
+| `fuso_horario` | TEXT NOT NULL | fuso IANA do tenant, padrão `America/Sao_Paulo` (Tarefa 014) |
+| `duracao_chamada_segundos` | INTEGER NOT NULL | duração da chamada no painel, padrão `10`, faixa 3–300 (Tarefa 014) |
 | `created_at` / `updated_at` | TIMESTAMP(3) | automáticos |
+
+### Auditoria (tabela `audit_log`, Tarefa 014)
+
+| Coluna | Tipo | Observação |
+|---|---|---|
+| `id` | TEXT PK | `randomUUID()` no serviço |
+| `tenant_id` | TEXT FK → `tenants` | com `ON DELETE CASCADE` |
+| `acao` | TEXT | ex.: `UPDATE` |
+| `entidade` / `entidade_id` | TEXT | ex.: `tenant` / id do tenant |
+| `dados_antes` / `dados_depois` | JSONB | snapshot dos campos alterados |
+| `criado_por` | TEXT | `NULL` até a autenticação (Tarefa 017) |
+| `created_at` | TIMESTAMP(3) | automático |
+
+- Tabela nasce com **RLS `FORCE`** + policy `tenant_id = current_setting('app.tenant_id')`.
+- O repositório grava o log **na mesma transação** da alteração (ou nada, se não
+  houve mudança real).
+- `npm run seed` cria a empresa de desenvolvimento (id em `DEV_TENANT_ID`).
 
 ## Padrão de repositório (obrigatório para as próximas entidades)
 
@@ -81,6 +100,11 @@ Toda tabela de domínio nova deve nascer com a **mesma policy de RLS**
 > **Descoberta importante (Tarefa 013):** o owner padrão do Neon tem
 > `BYPASSRLS = true` — ignora RLS mesmo com `FORCE`. Por isso o runtime usa um
 > **role de aplicação dedicado**; sem ele as políticas não têm efeito.
+
+> ⚠️ **`prisma migrate reset` dropa o schema `public`** e, com ele, os
+> `GRANT`s do `painel_app`. Após um reset, reaplique os grants abaixo (a
+> `ALTER DEFAULT PRIVILEGES` persiste — são as `GRANT ... ON SCHEMA/ALL TABLES`
+> que se perdem).
 
 SQL de provisionamento da role (executado como owner; senha fica só no `.env`):
 

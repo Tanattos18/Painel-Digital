@@ -320,7 +320,7 @@ Detalhamento futuro em `/docs/seguranca.md`.
 | ADR-009 | Tempo real (recomendado para o piloto: SSE atrás de interface abstrata) | **PENDENTE** | 038 |
 | ADR-010 | Armazenamento de mídia | **PENDENTE** | 043 |
 | ADR-011 | Persistir antes de emitir evento; transição de fila atômica | PROPOSTA | 026/040 |
-| ADR-012 | Fuso horário por tenant; armazenamento em UTC | PROPOSTA | 013/014 |
+| ADR-012 | Fuso horário por tenant; armazenamento em UTC | **IMPLEMENTADA** (2026-10-07): coluna `fuso_horario` + `lib/time.ts` | 014 |
 
 Cada ADR aprovada ganhará seção própria (contexto, opções, decisão, consequências) neste arquivo.
 
