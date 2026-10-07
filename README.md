@@ -155,7 +155,7 @@ Após o tempo configurado, o painel **retoma automaticamente** a playlist de mí
 | ☁️ Hospedagem | ⏸️ Não definida — aguarda decisão |
 | 🧪 Testes automatizados | ✅ Vitest — **9/9 passando** (8 unit + 1 integração RLS) |
 
-> **Progresso: 13/64 tarefas** · **Próxima tarefa:** 014 — Identidade da Empresa.
+> **Progresso: 13/64 tarefas** · **Próxima tarefa:** 014 — Configuração.
 
 ---
 

@@ -86,7 +86,7 @@ prisma migrate deploy do zero em banco Neon limpo (corrigido BOM do SQL da migra
 RESULTADO: isolamento multi-tenant estabelecido desde a 1ª tabela; role de
 aplicação painel_app sem BYPASSRLS (owner do Neon ignora RLS — descoberto no teste);
 padrão de repositório documentado para as próximas entidades
-PRÓXIMA TAREFA: 014 - Identidade da Empresa
+PRÓXIMA TAREFA: 014 - Configuração
 ```
 
 ### 2026-10-06 — Tarefa 012 concluída (Fase 1 ENCERRADA — 5/5)
@@ -274,7 +274,7 @@ Observações da base:
 | 10 | SEGURANÇA | 052–055 | PENDENTE |
 | 11 | PILOTO | 056–064 | PENDENTE |
 
-**Progresso: 13/64 tarefas** (Fases 0 e 1 ✅, Fase 2 em andamento). **Próxima tarefa: 014 — Identidade da Empresa**.
+**Progresso: 13/64 tarefas** (Fases 0 e 1 ✅, Fase 2 em andamento). **Próxima tarefa: 014 — Configuração**.
 
 ---
 
