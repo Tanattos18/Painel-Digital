@@ -38,6 +38,11 @@
 | Integração (`tenant-isolation`) | **1 teste — passando** (banco Neon limpo: `db:deploy` do zero, RLS provado) |
 | **Total** | **9/9 passando** (`npm test`) |
 
+> **Nota (observada em 2026-10-06):** na primeira execução logo após ~15 min
+> sem tocar no banco, o teste de integração falhou (provável *cold start* do
+> compute do Neon free tier); nas reexecuções imediatas seguiu **9/9**.
+> Se acontecer, basta rodar `npm test` novamente.
+
 ## Pendências
 
 - Roteiros do piloto: Tarefas 056–063 (Fase 11)
