@@ -145,16 +145,17 @@ Após o tempo configurado, o painel **retoma automaticamente** a playlist de mí
 | 🧭 Navegação (Tarefa 010) | ✅ Concluída — menu admin/recepção responsivo, rota ativa, itens em `constants/navigation.ts` |
 | 🧩 Componentes (Tarefa 011) | ✅ Concluída — 9 componentes em `src/components/ui/`, demo em `/dev/components`, docs em `docs/componentes.md` |
 | 🎨 Sistema visual (Tarefa 012) | ✅ Concluída — tokens `--color-brand-*`, contraste AA+, `docs/sistema-visual.md` — **Fase 1 completa (5/5), M1 atingido** |
+| 🏢 Empresa/Tenant (Tarefa 013) | ✅ Concluída — PostgreSQL + Prisma 6 (ADR-005), coluna + RLS (ADR-006), migração do zero no Neon, `TenantContext` obrigatório, **9/9 testes** — Fase 2 em andamento |
 | 📁 Estrutura de pastas (Tarefa 006) | ✅ Aplicada — `src/` conforme `docs/arquitetura.md` §5 |
 | 💻 Funcionalidades | ⬜ Nenhuma implementada (nenhuma tela, regra ou API) |
-| 📦 Dependências | ✅ Instaladas (357 pacotes) — `npm audit`: 5 altas só na cadeia de lint |
-| 🗄️ Banco de dados | ⏸️ Não definido — aguarda decisão (antes da Tarefa 013) |
+| 📦 Dependências | ✅ Instaladas — `prisma`, `@prisma/client`, `vitest`, `dotenv` adicionados (autorizados) |
+| 🗄️ Banco de dados | ✅ Definido — PostgreSQL (Neon free tier) + Prisma 6; RLS ativo (ADR-005/006) |
 | 🔐 Autenticação | ⏸️ Não definida — aguarda decisão (Tarefa 017) |
 | ⚡ Tempo real | ⏸️ Não definido — aguarda decisão (Tarefa 038) |
 | ☁️ Hospedagem | ⏸️ Não definida — aguarda decisão |
-| 🧪 Testes automatizados | ⬜ Estrutura `tests/` criada; suíte vazia |
+| 🧪 Testes automatizados | ✅ Vitest — **9/9 passando** (8 unit + 1 integração RLS) |
 
-> **Progresso: 12/64 tarefas** · **Próxima tarefa:** 013 — Empresa ⛔ *(decisão de banco/ORM/multi-tenant)*.
+> **Progresso: 13/64 tarefas** · **Próxima tarefa:** 014 — Identidade da Empresa.
 
 ---
 

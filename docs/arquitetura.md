@@ -313,8 +313,8 @@ Detalhamento futuro em `/docs/seguranca.md`.
 | ADR-002 | Backend como fonte única de verdade; recepção e painel não se comunicam diretamente | **DEFINIDA** (prompt) | — |
 | ADR-003 | Organização por feature, camadas Borda → Contexto → Serviço → Repositório | **CONFIRMADA** (2026-10-06) | 005/006 |
 | ADR-004 | Vocabulário genérico no código | **DEFINIDA** (prompt) | — |
-| ADR-005 | Banco de dados e ORM | **PENDENTE** | antes da 013 |
-| ADR-006 | Modelo multi-tenant (recomendado: coluna `tenantId` + RLS) | **PENDENTE** | antes da 013 |
+| ADR-005 | Banco de dados e ORM | **APROVADA** (2026-10-06): PostgreSQL + Prisma 6, dev em free tier | 013 |
+| ADR-006 | Modelo multi-tenant (recomendado: coluna `tenantId` + RLS) | **APROVADA** (2026-10-06): Modelo A + RLS desde a 1ª tabela | 013 |
 | ADR-007 | Autenticação de usuários | **PENDENTE** | 017 |
 | ADR-008 | Token de painel com hash, revogável, expirável | PROPOSTA (segurança: confirmar) | 035 |
 | ADR-009 | Tempo real (recomendado para o piloto: SSE atrás de interface abstrata) | **PENDENTE** | 038 |
@@ -331,4 +331,32 @@ Cada ADR aprovada ganhará seção própria (contexto, opções, decisão, conse
 1. ~~Validar tudo contra o projeto real (Tarefas 001–004).~~ ✅ Concluído em 2026-10-06.
 2. ~~Confirmar App Router × Pages Router.~~ ✅ **App Router** confirmado (Tarefa 001).
 3. Decidir hospedagem do piloto (influencia ADR-009) — Tarefa 038 ⛔.
-4. Obter autorização para ADR-005, 006, 007, 009, 010 — tarefas 013, 017, 038, 043 ⛔.
+4. Obter autorização para ADR-007, 009, 010 — tarefas 017, 038, 043 ⛔. *(ADR-005 e 006 aprovadas em 2026-10-06.)*
+5. Sub-decisões do PLANO §7.3 (e-mail global × por tenant; identificação da empresa no login) — decidir na Tarefa 017.
+
+---
+
+## 15. ADRs aprovadas
+
+### ADR-005 — Banco de dados e ORM (aprovada em 2026-10-06)
+
+- **Contexto:** a Tarefa 013 precisa de um banco; o piloto roda em notebooks
+  comuns e a hospedagem ainda não está fechada.
+- **Opções avaliadas:** PostgreSQL + Prisma · SQLite + Prisma · PostgreSQL + Drizzle.
+- **Decisão:** **PostgreSQL + Prisma 6** (linha estável; v7+ exige driver
+  adapters novos). Desenvolvimento em **free tier na nuvem** (Neon/Supabase) —
+  o solicitante criará a conta e fornecerá o `DATABASE_URL`.
+- **Consequências:** RLS disponível (defesa em profundidade); migrações
+  reprodutíveis via `prisma migrate`; dependências `prisma`, `@prisma/client` e
+  `vitest` autorizadas sob a regra de dependências do prompt.
+
+### ADR-006 — Modelo multi-tenant (aprovada em 2026-10-06)
+
+- **Opções:** A (coluna `tenantId`) · B (schema por tenant) · C (banco por tenant).
+- **Decisão:** **Modelo A** + as 7 camadas de defesa do PLANO §7.2, com **RLS
+  (`FORCE ROW LEVEL SECURITY`) ativo desde a primeira tabela**.
+- **Consequências:** toda tabela nova nasce com a policy; todo repositório usa
+  contexto obrigatório + `set_config` na transação; testes de isolamento
+  (052/063) provam a barreira.
+- **Adiado para 017:** e-mail global × por tenant; identificação da empresa no
+  login (subdomínio × slug × conta do usuário).

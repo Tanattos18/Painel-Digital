@@ -59,6 +59,36 @@ A próxima tarefa **não** é executada automaticamente se exigir decisão impor
 
 ## Registro de execução
 
+### 2026-10-06 — Tarefa 013 concluída (Fase 2: 1/4)
+
+| Tarefa | Situação | Evidência |
+|---|---|---|
+| 013 Empresa | **CONCLUÍDA** | ADR-005 (**PostgreSQL + Prisma 6.19.3**) e ADR-006 (**coluna + RLS**) aprovadas e registradas em `docs/arquitetura.md`; `model Tenant` + migração `0_init_tenant` **aplicada do zero em banco limpo** (Neon free tier) com `ENABLE/FORCE ROW LEVEL SECURITY` + policy `id = current_setting('app.tenant_id', true)`; `TenantContext` com `AsyncLocalStorage` — repositório **falha antes do banco** sem contexto; **9/9 testes passando** (RLS provado: consulta crua sem contexto = 0 linhas); **descoberta: owner do Neon tem `BYPASSRLS`** → role `painel_app` criada para o runtime (MIGRATE/DATABASE separados) |
+
+**Checkpoint — Tarefa 013:**
+
+```
+TAREFA: 013
+STATUS: CONCLUÍDA
+ARQUIVOS ALTERADOS: package.json, .env.example, prisma.config.ts,
+docs/arquitetura.md (ADR-005/006 APROVADAS + seção 15), docs/banco-de-dados.md,
+docs/testes.md, TAREFAS.md, README.md
+ARQUIVOS CRIADOS: prisma/schema.prisma, prisma/migrations/0_init_tenant/migration.sql,
+prisma/migrations/migration_lock.toml, src/lib/db/prisma.ts,
+src/lib/context/tenant-context.ts, src/features/tenant/{types,schema,repository,service}.ts,
+vitest.config.mts, tests/tenant/tenant-context.test.ts, tests/tenant/tenant-isolation.test.ts
+ARQUIVOS REMOVIDOS: nenhum
+DEPENDÊNCIAS: prisma@6.19.3 e @prisma/client@6.19.3 (ADR-005), vitest@5,
+dotenv (dev), @types/node@^24 (bump p/ Node 24)
+TESTES EXECUTADOS: npm test = 9/9 (8 unit sem banco + 1 integração RLS);
+npm run lint (0 avisos); npm run build (7 rotas, TS OK); dev — 6 páginas = 200;
+prisma migrate deploy do zero em banco Neon limpo (corrigido BOM do SQL da migração).
+RESULTADO: isolamento multi-tenant estabelecido desde a 1ª tabela; role de
+aplicação painel_app sem BYPASSRLS (owner do Neon ignora RLS — descoberto no teste);
+padrão de repositório documentado para as próximas entidades
+PRÓXIMA TAREFA: 014 - Identidade da Empresa
+```
+
 ### 2026-10-06 — Tarefa 012 concluída (Fase 1 ENCERRADA — 5/5)
 
 | Tarefa | Situação | Evidência |
@@ -233,7 +263,7 @@ Observações da base:
 |---|---|---|---|
 | 0 | PREPARAÇÃO | 001–007 | **✅ 7/7 CONCLUÍDA** |
 | 1 | BASE | 008–012 | **✅ 5/5 CONCLUÍDA** (M1 atingido) |
-| 2 | TENANT | 013–016 | PENDENTE |
+| 2 | TENANT | 013–016 | **1/4** em andamento |
 | 3 | ACESSO | 017–020 | PENDENTE |
 | 4 | CADASTROS | 021–025 | PENDENTE |
 | 5 | ATENDIMENTO | 026–032 | PENDENTE |
@@ -244,7 +274,7 @@ Observações da base:
 | 10 | SEGURANÇA | 052–055 | PENDENTE |
 | 11 | PILOTO | 056–064 | PENDENTE |
 
-**Progresso: 12/64 tarefas** (Fases 0 e 1 ✅). **Próxima tarefa: 013 — Empresa ⛔** (decisão de banco/ORM/multi-tenant — não começa sem autorização).
+**Progresso: 13/64 tarefas** (Fases 0 e 1 ✅, Fase 2 em andamento). **Próxima tarefa: 014 — Identidade da Empresa**.
 
 ---
 
@@ -794,18 +824,18 @@ Criar a entidade Empresa (Tenant) e a infraestrutura mínima de dados necessári
 
 ### Critérios de conclusão
 
-- [ ] Tenant persistido e lido via repositório com contexto.
-- [ ] Migração reprodutível documentada.
-- [ ] Padrão de isolamento estabelecido para as próximas entidades.
-- [ ] Testes executados e registrados
-- [ ] Documentação correspondente atualizada
-- [ ] Checkpoint apresentado
+- [x] Tenant persistido e lido via repositório com contexto.
+- [x] Migração reprodutível documentada.
+- [x] Padrão de isolamento estabelecido para as próximas entidades.
+- [x] Testes executados e registrados
+- [x] Documentação correspondente atualizada
+- [x] Checkpoint apresentado
 
-> ⛔ **PARAR e pedir autorização ANTES de iniciar: banco de dados, ORM e modelo multi-tenant (ADR-005 e ADR-006).**
+> ⛔ ~~PARAR e pedir autorização ANTES de iniciar~~ — **autorização concedida e ADR-005/006 aprovadas em 2026-10-06.**
 
 ### Status
 
-PENDENTE
+CONCLUÍDA
 
 ---
 
