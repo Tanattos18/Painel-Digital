@@ -8,6 +8,8 @@ export type Tenant = {
   email: string | null;
   endereco: string | null;
   status: TenantStatus;
+  fusoHorario: string;
+  duracaoChamadaSegundos: number;
   createdAt: Date;
   updatedAt: Date;
 };
@@ -18,4 +20,14 @@ export type CreateTenantInput = {
   telefone?: string;
   email?: string;
   endereco?: string;
+};
+
+export type UpdateTenantInput = {
+  nome: string;
+  nomeFantasia?: string;
+  telefone?: string;
+  email?: string;
+  endereco?: string;
+  fusoHorario: string;
+  duracaoChamadaSegundos: number;
 };

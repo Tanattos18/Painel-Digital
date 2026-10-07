@@ -34,4 +34,12 @@ export function optionalEnv(name: string, fallback: string): string {
 export const env = {
   nodeEnv: readNodeEnv(),
   databaseUrl: optionalEnv("DATABASE_URL", ""),
+  /**
+   * PROVISÓRIO até a Tarefa 017 (autenticação): id da empresa usada nas
+   * páginas enquanto não há sessão de usuário.
+   */
+  devTenantId: optionalEnv(
+    "DEV_TENANT_ID",
+    "00000000-0000-4000-8000-000000000001",
+  ),
 } as const;

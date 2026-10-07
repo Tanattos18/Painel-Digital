@@ -13,15 +13,36 @@ enum TenantStatus {
 }
 
 model Tenant {
-  id           String       @id
-  nome         String
-  nomeFantasia String?      @map("nome_fantasia")
-  telefone     String?
-  email        String?
-  endereco     String?      @map("endereco")
-  status       TenantStatus @default(ATIVO)
-  createdAt    DateTime     @default(now()) @map("created_at")
-  updatedAt    DateTime     @updatedAt @map("updated_at")
+  id                    String       @id
+  nome                  String
+  nomeFantasia          String?      @map("nome_fantasia")
+  telefone              String?
+  email                 String?
+  endereco              String?      @map("endereco")
+  status                TenantStatus @default(ATIVO)
+  fusoHorario           String       @default("America/Sao_Paulo") @map("fuso_horario")
+  duracaoChamadaSegundos Int          @default(10) @map("duracao_chamada_segundos")
+  createdAt             DateTime     @default(now()) @map("created_at")
+  updatedAt             DateTime     @updatedAt @map("updated_at")
+
+  auditorias AuditLog[]
 
   @@map("tenants")
+}
+
+model AuditLog {
+  id          String   @id
+  tenantId    String   @map("tenant_id")
+  acao        String
+  entidade    String
+  entidadeId  String   @map("entidade_id")
+  dadosAntes  Json?    @map("dados_antes")
+  dadosDepois Json?    @map("dados_depois")
+  criadoPor   String?  @map("criado_por")
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@index([tenantId])
+  @@map("audit_log")
 }
